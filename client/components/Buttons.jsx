@@ -28,6 +28,7 @@ class Buttons extends React.Component {
     for (let i = 0; i < qualityClass.length; i++) {
       qualityClass[i].addEventListener("click", (x) => {
         this.props.dispatch(qualityToState(x.target.value))
+        if (!this.props.selectedChord.selectedKey) this.props.dispatch(keyToState("C"))
       })
     }
   }
