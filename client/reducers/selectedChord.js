@@ -4,6 +4,7 @@ const initialState = {
 
 function selectedChord(state = initialState, action) {
   switch (action.type) {
+
     case "SELECT_CHORD":
       return action.chord
       
@@ -26,6 +27,11 @@ function selectedChord(state = initialState, action) {
         selectedKey: state.selectedKey,
         selectedTone: state.selectedTone,
         selectedQuality: action.chord.selectedQuality
+      }
+
+    case "SELECT_FRET_DISPLAY" :
+      return {
+        currentDisplay: action.display.fretboardTone
       }
 
     default:

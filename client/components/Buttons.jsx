@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
-import {keyToState, toneToState, qualityToState} from "../actions"
+import {keyToState, toneToState, qualityToState, fretboardToneToState} from "../actions"
 
 class Buttons extends React.Component {
   constructor(props) {
@@ -33,6 +33,14 @@ class Buttons extends React.Component {
         this.defaultState()
       })
     }
+
+    let fretboardDisplay = document.getElementsByClassName("fretboard-tone")
+    for (let i = 0; i < fretboardDisplay.length; i++) {
+      fretboardDisplay[i].addEventListener("click", (x) => {
+        console.log("in fretboard Tone")
+        this.props.dispatch(fretboardToneToState(x.target.value))
+      })
+    }
   }
 
 defaultState() {
@@ -55,6 +63,15 @@ render() {
     </div>
   </div>
 
+  <div className="display-selection">
+  <h4>Fretboard notes:</h4>
+        <button className="fretboard-tone" type="button" value="#">#</button>
+        <button className="fretboard-tone" type="button" value="b">b</button>
+        <button className="fretboard-tone" type="button" value="">clear</button>
+  </div>
+
+  <div className="chord-selection">
+  <h4>Select chord:</h4>
     <div className="chord-buttons-row">
       <div className="key-row">
         <button className="key" type="button" value="C">C</button>
@@ -91,6 +108,7 @@ render() {
       </div>
 
     </div>
+  </div>
   </div>
   )
 }

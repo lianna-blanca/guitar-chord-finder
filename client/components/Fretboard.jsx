@@ -8,8 +8,8 @@ class Fretboard extends React.Component {
   constructor(props){
     super(props)
 
-    this.stateOfSharpFlats = this.stateOfSharpFlats.bind(this)
-    this.displaySharpOrFlat = this.displaySharpOrFlat.bind(this)
+    this.fillFretboardWithSharpsOrFlats = this.fillFretboardWithSharpsOrFlats.bind(this)
+    this.displayFretboardSharpsFlatsORClear = this.displayFretboardSharpsFlatsORClear.bind(this)
     this.displaySharp = this.displaySharp.bind(this)
     this.displayFlat = this.displayFlat.bind(this)
     this.getChordKey = this.getChordKey.bind(this)
@@ -39,20 +39,18 @@ componentDidMount() {
   }
 }
 
-stateOfSharpFlats() {
-// ---- For filling the sharp/flat frets with appropriate tex
-console.log("------- in stateOfSharpFlats")
-console.log("tone is", this.props.selectedChord.selectedTone)
-
+fillFretboardWithSharpsOrFlats() {
+// ---- For filling all the sharp/flat frets with appropriate text
   if (this.props.selectedChord.selectedTone !== undefined) {
     let sharpsAndFlats = document.getElementsByClassName("sharp-or-flat")
     for (let i = 0; i < sharpsAndFlats.length; i++) {
-      this.displaySharpOrFlat(sharpsAndFlats[i].attributes.id.value)
+      this.displayFretboardSharpsFlatsORClear(sharpsAndFlats[i].attributes.id.value)
     }
   }
 }
 
-displaySharpOrFlat(inputID) {
+displayFretboardSharpsFlatsORClear(inputID) {
+console.log(inputID)
 // ---- For changing the innerHTML of frets depending on the current tone
   let fretToAlter = document.getElementById(inputID)
     if (this.props.selectedChord.selectedTone === "#") {
@@ -222,7 +220,7 @@ unLightNote(incomingID) {
 }
 
 render() {
-this.stateOfSharpFlats()
+this.fillFretboardWithSharpsOrFlats()
 this.getFretsForChord()
 this.displayChordNotes()
 

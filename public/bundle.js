@@ -137,6 +137,15 @@ var qualityToState = exports.qualityToState = function qualityToState(quality) {
   };
 };
 
+var fretboardToneToState = exports.fretboardToneToState = function fretboardToneToState(fretboardTone) {
+  return {
+    type: "SELECT_FRET_DISPLAY",
+    display: {
+      currentDisplay: fretboardTone
+    }
+  };
+};
+
 /***/ }),
 
 /***/ "./client/chordAPI.js":
@@ -317,6 +326,14 @@ var Buttons = function (_React$Component) {
           _this2.defaultState();
         });
       }
+
+      var fretboardDisplay = document.getElementsByClassName("fretboard-tone");
+      for (var _i3 = 0; _i3 < fretboardDisplay.length; _i3++) {
+        fretboardDisplay[_i3].addEventListener("click", function (x) {
+          console.log("in fretboard Tone");
+          _this2.props.dispatch((0, _actions.fretboardToneToState)(x.target.value));
+        });
+      }
     }
   }, {
     key: "defaultState",
@@ -369,121 +386,154 @@ var Buttons = function (_React$Component) {
         ),
         _react2.default.createElement(
           "div",
-          { className: "chord-buttons-row" },
+          { className: "display-selection" },
           _react2.default.createElement(
-            "div",
-            { className: "key-row" },
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "C" },
-              "C"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "D" },
-              "D"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "E" },
-              "E"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "F" },
-              "F"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "G" },
-              "G"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "A" },
-              "A"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "B" },
-              "B"
-            )
+            "h4",
+            null,
+            "Fretboard notes:"
           ),
           _react2.default.createElement(
-            "div",
-            { className: "tone-row" },
-            _react2.default.createElement(
-              "button",
-              { className: "tone", type: "button", value: "#" },
-              "#"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "tone", type: "button", value: "b" },
-              "b"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "tone", type: "button", value: "" },
-              "clear"
-            )
+            "button",
+            { className: "fretboard-tone", type: "button", value: "#" },
+            "#"
+          ),
+          _react2.default.createElement(
+            "button",
+            { className: "fretboard-tone", type: "button", value: "b" },
+            "b"
+          ),
+          _react2.default.createElement(
+            "button",
+            { className: "fretboard-tone", type: "button", value: "" },
+            "clear"
           )
         ),
         _react2.default.createElement(
           "div",
-          { className: "chord-buttons-row" },
+          { className: "chord-selection" },
+          _react2.default.createElement(
+            "h4",
+            null,
+            "Select chord:"
+          ),
           _react2.default.createElement(
             "div",
-            { className: "quality-row" },
+            { className: "chord-buttons-row" },
             _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "maj" },
-              "M / maj"
+              "div",
+              { className: "key-row" },
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "C" },
+                "C"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "D" },
+                "D"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "E" },
+                "E"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "F" },
+                "F"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "G" },
+                "G"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "A" },
+                "A"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "B" },
+                "B"
+              )
             ),
             _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "m" },
-              "m / min"
-            ),
+              "div",
+              { className: "tone-row" },
+              _react2.default.createElement(
+                "button",
+                { className: "tone", type: "button", value: "#" },
+                "#"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "tone", type: "button", value: "b" },
+                "b"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "tone", type: "button", value: "" },
+                "clear"
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "chord-buttons-row" },
             _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "7" },
-              "7"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "maj7" },
-              "M7 / maj7"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "m7" },
-              "m7 / min7"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "dim" },
-              "dim"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "dim7" },
-              "dim7"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "aug" },
-              "aug"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "sus2" },
-              "sus2"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "sus4" },
-              "sus4"
+              "div",
+              { className: "quality-row" },
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "maj" },
+                "M / maj"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "m" },
+                "m / min"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "7" },
+                "7"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "maj7" },
+                "M7 / maj7"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "m7" },
+                "m7 / min7"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "dim" },
+                "dim"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "dim7" },
+                "dim7"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "aug" },
+                "aug"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "sus2" },
+                "sus2"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "sus4" },
+                "sus4"
+              )
             )
           )
         )
@@ -554,8 +604,8 @@ var Fretboard = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Fretboard.__proto__ || Object.getPrototypeOf(Fretboard)).call(this, props));
 
-    _this.stateOfSharpFlats = _this.stateOfSharpFlats.bind(_this);
-    _this.displaySharpOrFlat = _this.displaySharpOrFlat.bind(_this);
+    _this.fillFretboardWithSharpsOrFlats = _this.fillFretboardWithSharpsOrFlats.bind(_this);
+    _this.displayFretboardSharpsFlatsORClear = _this.displayFretboardSharpsFlatsORClear.bind(_this);
     _this.displaySharp = _this.displaySharp.bind(_this);
     _this.displayFlat = _this.displayFlat.bind(_this);
     _this.getChordKey = _this.getChordKey.bind(_this);
@@ -589,22 +639,20 @@ var Fretboard = function (_React$Component) {
       }
     }
   }, {
-    key: "stateOfSharpFlats",
-    value: function stateOfSharpFlats() {
-      // ---- For filling the sharp/flat frets with appropriate tex
-      console.log("------- in stateOfSharpFlats");
-      console.log("tone is", this.props.selectedChord.selectedTone);
-
+    key: "fillFretboardWithSharpsOrFlats",
+    value: function fillFretboardWithSharpsOrFlats() {
+      // ---- For filling all the sharp/flat frets with appropriate text
       if (this.props.selectedChord.selectedTone !== undefined) {
         var sharpsAndFlats = document.getElementsByClassName("sharp-or-flat");
         for (var i = 0; i < sharpsAndFlats.length; i++) {
-          this.displaySharpOrFlat(sharpsAndFlats[i].attributes.id.value);
+          this.displayFretboardSharpsFlatsORClear(sharpsAndFlats[i].attributes.id.value);
         }
       }
     }
   }, {
-    key: "displaySharpOrFlat",
-    value: function displaySharpOrFlat(inputID) {
+    key: "displayFretboardSharpsFlatsORClear",
+    value: function displayFretboardSharpsFlatsORClear(inputID) {
+      console.log(inputID);
       // ---- For changing the innerHTML of frets depending on the current tone
       var fretToAlter = document.getElementById(inputID);
       if (this.props.selectedChord.selectedTone === "#") {
@@ -780,7 +828,7 @@ var Fretboard = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      this.stateOfSharpFlats();
+      this.fillFretboardWithSharpsOrFlats();
       this.getFretsForChord();
       this.displayChordNotes();
 
@@ -1253,6 +1301,7 @@ function selectedChord() {
   var action = arguments[1];
 
   switch (action.type) {
+
     case "SELECT_CHORD":
       return action.chord;
 
@@ -1275,6 +1324,11 @@ function selectedChord() {
         selectedKey: state.selectedKey,
         selectedTone: state.selectedTone,
         selectedQuality: action.chord.selectedQuality
+      };
+
+    case "SELECT_FRET_DISPLAY":
+      return {
+        currentDisplay: action.display.fretboardTone
       };
 
     default:

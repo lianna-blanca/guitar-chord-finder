@@ -37,3 +37,12 @@ export const qualityToState = (quality) => {
   }
 }
 
+export const fretboardToneToState = (fretboardTone) => {
+  return {
+    type: "SELECT_FRET_DISPLAY",
+    display: {
+      currentDisplay: fretboardTone
+    }
+  }
+}
+
