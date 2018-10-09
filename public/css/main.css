@@ -1,0 +1,276 @@
+body {
+  font-family: serif;
+  background-color: #d8bea6;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3em;
+  text-align: center;
+}
+
+
+/* ---------------------- Fretboard ----------------------  */
+
+/* ------------- Normal Strings ------------- */
+.string {
+  display: flex;
+  align-content: space-around;
+}
+
+.string1 {
+border-bottom: 2px rgb(165, 165, 165) solid;
+height: 14px;
+font-size: 1.2em;
+padding-bottom: 5px;
+/* padding-top: -2px; */
+
+/* vertical-align: center; */
+}
+.string2 {
+border-bottom: 3px rgb(165, 165, 165) solid;
+height: 19px;
+/* padding-bottom: 1px; */
+}
+.string3 {
+border-bottom: 4px rgb(165, 165, 165) solid;
+height: 19px;
+}
+.string4 {
+border-bottom: 5px rgb(255, 177, 31) solid;
+height: 19px;
+}
+.string5 {
+border-bottom: 6px rgb(255, 177, 31) solid;
+height: 19px;
+}
+.string6 {
+border-bottom: 7px rgb(255, 177, 31) solid;
+height: 19px;
+}
+
+/* ------------- Normal Frets ------------- */
+
+.frets {
+  width: 100%;
+}
+
+.fret {
+  text-align: center;
+  vertical-align: middle;
+  background-color: rgb(143, 116, 76);
+  font-weight: 900;
+  font-size: 1.2em;
+  padding-top: 15px;
+}
+
+.fret0 {
+  background-color: rgb(87, 62, 38);
+  border-right: 15px rgb(233, 233, 233) solid;
+  width: 50px;
+}
+
+.fret1 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 160px;
+}
+
+.fret2 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 155px;
+}
+
+.fret3 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 150px;
+}  
+
+.fret4 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 145px;
+  }  
+
+.fret5 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 140px;
+  } 
+
+.fret6 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 135px;
+  } 
+
+.fret7 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 130px;
+  } 
+
+.fret8 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 125px;
+  } 
+
+.fret9 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 120px;
+  } 
+
+.fret10 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 115px;
+  } 
+
+.fret11 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 110px;
+  } 
+
+.fret12 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 105px;
+  } 
+
+
+/* ------------- Special Strings and Frets ------------- */
+
+
+/* .zero-string {
+} */
+
+.string0 {
+  /* border-right: #d8bea6; */
+  background-color: #d8bea6;
+  border-right: 6px solid #d8bea6;
+}
+
+.string7 {
+  height: 1px;
+  }      
+
+
+.fret00 {
+  border-right: 15px white solid;
+  width: 50px;
+  font-size: 1.1em;
+}
+    
+.fret01 {
+  width: 160px;
+}
+
+.fret02 {
+  width: 155px;
+}
+
+.fret03 {
+  width: 150px;
+  font-size: 0.9em;
+  padding-bottom: 10px;
+}  
+
+.fret04 {
+  width: 145px;
+  }  
+
+.fret05 {
+  width: 140px;
+  font-size: 0.9em;
+  padding-bottom: 10px;
+  } 
+
+.fret06 {
+  width: 135px;
+  } 
+
+.fret07 {
+  width: 130px;
+  font-size: 0.9em;
+  padding-bottom: 10px;
+  } 
+
+.fret08 {
+  width: 125px;
+  } 
+
+.fret09 {
+  width: 120px;
+  font-size: 0.9em;
+  padding-bottom: 10px;
+  } 
+
+.fret010 {
+  width: 115px;
+  } 
+
+.fret011 {
+  width: 110px;
+  } 
+
+.fret012 {
+  width: 105px;
+  font-size: 0.8em;
+  padding-bottom: 10px;
+ } 
+
+
+.lit {
+  background-color: #80dfff;
+}
+
+
+/* ---------------------- Chord buttons ----------------------  */
+
+.keyChordContainer {
+  padding: 5px;
+}
+
+.keyChordContainer p {
+  font-size: 1.1em;
+}
+
+.chord-buttons-row {
+  background-color: #D8CABC;
+  display: flex;
+  width: 80%;
+  margin: auto;
+}
+
+.key-row,
+.tone-row,
+.quality-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 8px;
+}
+
+.key-row,
+.quality-row {
+  width: 100%;
+}
+
+.tone-row {
+  width: 50%;
+}
+
+.key,
+.tone,
+.quality {
+  min-width: 80px;
+} 
+
+.tone {
+  max-height: 25px;
+}
+
+/* ---------------------- Song display ----------------------  */
+
+/* #song-display-wrapper {
+  margin-top: 20px;
+  border: 1px solid black;
+}
+
+#song-display {
+  white-space: pre;
+} */
