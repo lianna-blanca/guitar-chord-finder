@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux"
 import {keyToState, toneToState, qualityToState} from "../actions"
 
-class KeyChordButtons extends React.Component {
+class Buttons extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -86,4 +86,5 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(KeyChordButtons)
+export default connect(mapStateToProps)(
+Buttons)
