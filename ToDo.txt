@@ -11,9 +11,8 @@ Flats do not appear on fretboard when lit (written notes: whole only)
 Writing does not appear in lit frets (written notes: whole only)
 * Cm7
 
-Double sharps and flats appear on fretboard as next whole (written notes: whole)
+Double sharps and flats appear on fretboard as next whole (written notes: whole only)
 * Baug (F##)
 * Cbm7 (Bbb, Ebb)
 
-
-
+Fretboard click lights up fret but does not add writing (written notes: whole only)

@@ -283,7 +283,10 @@ var Buttons = function (_React$Component) {
   function Buttons(props) {
     _classCallCheck(this, Buttons);
 
-    return _possibleConstructorReturn(this, (Buttons.__proto__ || Object.getPrototypeOf(Buttons)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Buttons.__proto__ || Object.getPrototypeOf(Buttons)).call(this, props));
+
+    _this.defaultState = _this.defaultState.bind(_this);
+    return _this;
   }
 
   _createClass(Buttons, [{
@@ -296,6 +299,7 @@ var Buttons = function (_React$Component) {
       for (var i = 0; i < keyClass.length; i++) {
         keyClass[i].addEventListener("click", function (x) {
           _this2.props.dispatch((0, _actions.keyToState)(x.target.value));
+          _this2.defaultState();
         });
       }
 
@@ -310,9 +314,16 @@ var Buttons = function (_React$Component) {
       for (var _i2 = 0; _i2 < qualityClass.length; _i2++) {
         qualityClass[_i2].addEventListener("click", function (x) {
           _this2.props.dispatch((0, _actions.qualityToState)(x.target.value));
-          if (!_this2.props.selectedChord.selectedKey) _this2.props.dispatch((0, _actions.keyToState)("C"));
+          _this2.defaultState();
         });
       }
+    }
+  }, {
+    key: "defaultState",
+    value: function defaultState() {
+      if (!this.props.selectedChord.selectedKey) this.props.dispatch((0, _actions.keyToState)("C"));
+      if (!this.props.selectedChord.selectedTone) this.props.dispatch((0, _actions.toneToState)(""));
+      if (!this.props.selectedChord.selectedQuality) this.props.dispatch((0, _actions.qualityToState)("maj"));
     }
   }, {
     key: "render",
@@ -569,9 +580,11 @@ var Fretboard = function (_React$Component) {
       for (var i = 0; i < frets.length; i++) {
         frets[i].addEventListener("click", function (x) {
           _this2.lightUpNote(x.target.id);
+          // need to trigger writing of inner HTML if in clear mode
         });
         frets[i].addEventListener("dblclick", function (x) {
           _this2.unLightNote(x.target.id);
+          // need to trigger clearing of inner HTML if in clear mode
         });
       }
     }
@@ -579,6 +592,9 @@ var Fretboard = function (_React$Component) {
     key: "stateOfSharpFlats",
     value: function stateOfSharpFlats() {
       // ---- For filling the sharp/flat frets with appropriate tex
+      console.log("------- in stateOfSharpFlats");
+      console.log("tone is", this.props.selectedChord.selectedTone);
+
       if (this.props.selectedChord.selectedTone !== undefined) {
         var sharpsAndFlats = document.getElementsByClassName("sharp-or-flat");
         for (var i = 0; i < sharpsAndFlats.length; i++) {

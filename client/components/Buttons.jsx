@@ -5,6 +5,7 @@ import {keyToState, toneToState, qualityToState} from "../actions"
 class Buttons extends React.Component {
   constructor(props) {
     super(props);
+    this.defaultState = this.defaultState.bind(this)
   }
 
   componentDidMount(){
@@ -14,6 +15,7 @@ class Buttons extends React.Component {
     for (let i = 0; i < keyClass.length; i++) {
       keyClass[i].addEventListener("click", (x) => {
         this.props.dispatch(keyToState(x.target.value))
+        this.defaultState()
       })
     }
 
@@ -28,10 +30,16 @@ class Buttons extends React.Component {
     for (let i = 0; i < qualityClass.length; i++) {
       qualityClass[i].addEventListener("click", (x) => {
         this.props.dispatch(qualityToState(x.target.value))
-        if (!this.props.selectedChord.selectedKey) this.props.dispatch(keyToState("C"))
+        this.defaultState()
       })
     }
   }
+
+defaultState() {
+  if (!this.props.selectedChord.selectedKey) this.props.dispatch(keyToState("C"))
+  if (!this.props.selectedChord.selectedTone) this.props.dispatch(toneToState(""))
+  if (!this.props.selectedChord.selectedQuality) this.props.dispatch(qualityToState("maj"))
+}
 
 render() { 
   return (

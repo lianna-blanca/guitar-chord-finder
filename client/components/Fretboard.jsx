@@ -29,9 +29,11 @@ componentDidMount() {
   for (let i = 0; i < frets.length; i++) {
     frets[i].addEventListener("click", (x) => {
       this.lightUpNote(x.target.id)
+      // need to trigger writing of inner HTML if in clear mode
     })
     frets[i].addEventListener("dblclick", (x) => {
       this.unLightNote(x.target.id)
+      // need to trigger clearing of inner HTML if in clear mode
     })
 
   }
@@ -39,6 +41,9 @@ componentDidMount() {
 
 stateOfSharpFlats() {
 // ---- For filling the sharp/flat frets with appropriate tex
+console.log("------- in stateOfSharpFlats")
+console.log("tone is", this.props.selectedChord.selectedTone)
+
   if (this.props.selectedChord.selectedTone !== undefined) {
     let sharpsAndFlats = document.getElementsByClassName("sharp-or-flat")
     for (let i = 0; i < sharpsAndFlats.length; i++) {
