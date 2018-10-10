@@ -34,13 +34,13 @@ class Buttons extends React.Component {
       })
     }
 
-    let fretboardDisplay = document.getElementsByClassName("fretboard-tone")
-    for (let i = 0; i < fretboardDisplay.length; i++) {
-      fretboardDisplay[i].addEventListener("click", (x) => {
-        console.log("in fretboard Tone")
-        this.props.dispatch(fretboardToneToState(x.target.value))
-      })
-    }
+    // let fretboardDisplay = document.getElementsByClassName("fretboard-tone")
+    // for (let i = 0; i < fretboardDisplay.length; i++) {
+    //   fretboardDisplay[i].addEventListener("click", (x) => {
+    //     console.log("in fretboard Tone")
+    //     this.props.dispatch(fretboardToneToState(x.target.value))
+    //   })
+    // }
   }
 
 defaultState() {

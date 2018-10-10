@@ -137,15 +137,6 @@ var qualityToState = exports.qualityToState = function qualityToState(quality) {
   };
 };
 
-var fretboardToneToState = exports.fretboardToneToState = function fretboardToneToState(fretboardTone) {
-  return {
-    type: "SELECT_FRET_DISPLAY",
-    display: {
-      currentDisplay: fretboardTone
-    }
-  };
-};
-
 /***/ }),
 
 /***/ "./client/chordAPI.js":
@@ -197,8 +188,6 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
 var _Fretboard = __webpack_require__(/*! ./Fretboard */ "./client/components/Fretboard.jsx");
 
 var _Fretboard2 = _interopRequireDefault(_Fretboard);
@@ -214,6 +203,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import {connect} from 'react-redux'
+
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -244,13 +235,15 @@ var App = function (_React$Component) {
   return App;
 }(_react2.default.Component);
 
-function mapStateToProps(state) {
-  return {
-    reducerName: state.reducerName
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     reducerName: state.reducerName
+//   }
+// }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
+// export default connect(mapStateToProps)(App)
+
+exports.default = App;
 
 /***/ }),
 
@@ -327,13 +320,13 @@ var Buttons = function (_React$Component) {
         });
       }
 
-      var fretboardDisplay = document.getElementsByClassName("fretboard-tone");
-      for (var _i3 = 0; _i3 < fretboardDisplay.length; _i3++) {
-        fretboardDisplay[_i3].addEventListener("click", function (x) {
-          console.log("in fretboard Tone");
-          _this2.props.dispatch((0, _actions.fretboardToneToState)(x.target.value));
-        });
-      }
+      // let fretboardDisplay = document.getElementsByClassName("fretboard-tone")
+      // for (let i = 0; i < fretboardDisplay.length; i++) {
+      //   fretboardDisplay[i].addEventListener("click", (x) => {
+      //     console.log("in fretboard Tone")
+      //     this.props.dispatch(fretboardToneToState(x.target.value))
+      //   })
+      // }
     }
   }, {
     key: "defaultState",
@@ -1324,11 +1317,6 @@ function selectedChord() {
         selectedKey: state.selectedKey,
         selectedTone: state.selectedTone,
         selectedQuality: action.chord.selectedQuality
-      };
-
-    case "SELECT_FRET_DISPLAY":
-      return {
-        currentDisplay: action.display.fretboardTone
       };
 
     default:
