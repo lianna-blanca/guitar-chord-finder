@@ -1,3 +1,11 @@
+export const fretDisplayToState = (fretDisplay) => {
+  return {
+    type: "SELECT_DISPLAY",
+    display: fretDisplay
+  }
+}
+
+
 export const entireChordToState = (key, tone, quality) => {
   return {
     type: "SELECT_CHORD",

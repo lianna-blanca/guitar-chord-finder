@@ -39,6 +39,8 @@ componentDidMount() {
   }
 }
 
+// -----------------------------------------------------------
+
 fillFretboardWithSharpsOrFlats() {
 // ---- For filling all the sharp/flat frets with appropriate text
   if (this.props.selectedChord.selectedTone !== undefined) {
@@ -186,6 +188,7 @@ clearLitNotes() {
   }
 }
 
+// -----------------------------------------------------------
 displayChordNotes() {
   let chordNotes = Chord.notes(this.getChordKey(), this.props.selectedChord.selectedQuality)
   if (chordNotes.length > 0) {

@@ -99,6 +99,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var fretDisplayToState = exports.fretDisplayToState = function fretDisplayToState(fretDisplay) {
+  return {
+    type: "SELECT_DISPLAY",
+    display: fretDisplay
+  };
+};
+
 var entireChordToState = exports.entireChordToState = function entireChordToState(key, tone, quality) {
   return {
     type: "SELECT_CHORD",
@@ -309,6 +316,7 @@ var Buttons = function (_React$Component) {
       for (var _i = 0; _i < toneClass.length; _i++) {
         toneClass[_i].addEventListener("click", function (x) {
           _this2.props.dispatch((0, _actions.toneToState)(x.target.value));
+          // add default state once fretboard display buttons are working
         });
       }
 
@@ -320,13 +328,12 @@ var Buttons = function (_React$Component) {
         });
       }
 
-      // let fretboardDisplay = document.getElementsByClassName("fretboard-tone")
-      // for (let i = 0; i < fretboardDisplay.length; i++) {
-      //   fretboardDisplay[i].addEventListener("click", (x) => {
-      //     console.log("in fretboard Tone")
-      //     this.props.dispatch(fretboardToneToState(x.target.value))
-      //   })
-      // }
+      var fretboardDisplay = document.getElementsByClassName("fretboard-tone");
+      for (var _i3 = 0; _i3 < fretboardDisplay.length; _i3++) {
+        fretboardDisplay[_i3].addEventListener("click", function (x) {
+          _this2.props.dispatch((0, _actions.fretDisplayToState)(x.target.value));
+        });
+      }
     }
   }, {
     key: "defaultState",
@@ -387,17 +394,17 @@ var Buttons = function (_React$Component) {
           ),
           _react2.default.createElement(
             "button",
-            { className: "fretboard-tone", type: "button", value: "#" },
+            { className: "fretboard-tone", type: "button", value: "sharps" },
             "#"
           ),
           _react2.default.createElement(
             "button",
-            { className: "fretboard-tone", type: "button", value: "b" },
+            { className: "fretboard-tone", type: "button", value: "flats" },
             "b"
           ),
           _react2.default.createElement(
             "button",
-            { className: "fretboard-tone", type: "button", value: "" },
+            { className: "fretboard-tone", type: "button", value: "clear" },
             "clear"
           )
         ),
@@ -631,6 +638,9 @@ var Fretboard = function (_React$Component) {
         });
       }
     }
+
+    // -----------------------------------------------------------
+
   }, {
     key: "fillFretboardWithSharpsOrFlats",
     value: function fillFretboardWithSharpsOrFlats() {
@@ -783,6 +793,9 @@ var Fretboard = function (_React$Component) {
         }
       }
     }
+
+    // -----------------------------------------------------------
+
   }, {
     key: "displayChordNotes",
     value: function displayChordNotes() {
@@ -1264,10 +1277,15 @@ var _selectedChord = __webpack_require__(/*! ./selectedChord */ "./client/reduce
 
 var _selectedChord2 = _interopRequireDefault(_selectedChord);
 
+var _selectedDisplay = __webpack_require__(/*! ./selectedDisplay */ "./client/reducers/selectedDisplay.js");
+
+var _selectedDisplay2 = _interopRequireDefault(_selectedDisplay);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var reducers = (0, _redux.combineReducers)({
-  selectedChord: _selectedChord2.default
+  selectedChord: _selectedChord2.default,
+  selectedDisplay: _selectedDisplay2.default
 });
 
 exports.default = reducers;
@@ -1325,6 +1343,39 @@ function selectedChord() {
 }
 
 exports.default = selectedChord;
+
+/***/ }),
+
+/***/ "./client/reducers/selectedDisplay.js":
+/*!********************************************!*\
+  !*** ./client/reducers/selectedDisplay.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var initialState = {
+  display: "clear"
+};
+
+function selectedDisplay() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case "SELECT_DISPLAY":
+      return action.display;
+    default:
+      return state;
+  }
+}
+
+exports.default = selectedDisplay;
 
 /***/ }),
 

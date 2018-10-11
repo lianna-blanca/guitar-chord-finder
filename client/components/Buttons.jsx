@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux"
-import {keyToState, toneToState, qualityToState, fretboardToneToState} from "../actions"
+import {keyToState, toneToState, qualityToState, fretDisplayToState} from "../actions"
 
 class Buttons extends React.Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class Buttons extends React.Component {
     for (let i = 0; i < toneClass.length; i++) {
       toneClass[i].addEventListener("click", (x) => {
         this.props.dispatch(toneToState(x.target.value))
+        // add default state once fretboard display buttons are working
       })
     }
 
@@ -34,13 +35,12 @@ class Buttons extends React.Component {
       })
     }
 
-    // let fretboardDisplay = document.getElementsByClassName("fretboard-tone")
-    // for (let i = 0; i < fretboardDisplay.length; i++) {
-    //   fretboardDisplay[i].addEventListener("click", (x) => {
-    //     console.log("in fretboard Tone")
-    //     this.props.dispatch(fretboardToneToState(x.target.value))
-    //   })
-    // }
+    let fretboardDisplay = document.getElementsByClassName("fretboard-tone")
+    for (let i = 0; i < fretboardDisplay.length; i++) {
+      fretboardDisplay[i].addEventListener("click", (x) => {
+        this.props.dispatch(fretDisplayToState(x.target.value))
+      })
+    }
   }
 
 defaultState() {
@@ -65,9 +65,9 @@ render() {
 
   <div className="display-selection">
   <h4>Fretboard notes:</h4>
-        <button className="fretboard-tone" type="button" value="#">#</button>
-        <button className="fretboard-tone" type="button" value="b">b</button>
-        <button className="fretboard-tone" type="button" value="">clear</button>
+        <button className="fretboard-tone" type="button" value="sharps">#</button>
+        <button className="fretboard-tone" type="button" value="flats">b</button>
+        <button className="fretboard-tone" type="button" value="clear">clear</button>
   </div>
 
   <div className="chord-selection">
