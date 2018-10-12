@@ -46,8 +46,8 @@ fretboardDisplay() {
 // ---- For filling all the sharp/flat frets with appropriate text
 console.log("in fretboardDisplay")
 console.log(this.props)
-console.log(this.props.selectedDislpay)
-// console.log(document.getElementById("sandbox"))
+console.log(this.props.selectedChord) // this works fine
+console.log(this.props.selectedDislpay) // this does not work
 
 
 // ------------------
@@ -57,7 +57,7 @@ console.log(this.props.selectedDislpay)
       this.displayFretboardSharpsFlatsORClear(sharpsAndFlats[i].attributes.id.value)
     }
   }
-  else console.log("still undefined grrrrr")
+  else console.log("still undefined :(")
 }
 
 displayFretboardSharpsFlatsORClear(inputID) {
