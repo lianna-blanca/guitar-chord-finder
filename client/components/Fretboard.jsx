@@ -47,11 +47,11 @@ fretboardDisplay() {
 console.log("in fretboardDisplay")
 console.log(this.props)
 console.log(this.props.selectedChord) // this works fine
-console.log(this.props.selectedDislpay) // this does not work
+console.log(this.props.selectedDisplay) // this does not work
 
 
 // ------------------
-  if (this.props.selectedDislpay !== undefined) {
+  if (this.props.selectedDisplay !== undefined) {
     let sharpsAndFlats = document.getElementsByClassName("sharp-or-flat")
     for (let i = 0; i < sharpsAndFlats.length; i++) {
       this.displayFretboardSharpsFlatsORClear(sharpsAndFlats[i].attributes.id.value)
@@ -375,7 +375,7 @@ this.displayChordNotes()
 
 function mapStateToProps(state) {
   return {
-    selectedDislpay: state.selectedDislpay,
+    selectedDisplay: state.selectedDisplay,
     selectedChord: state.selectedChord
   }
 }
