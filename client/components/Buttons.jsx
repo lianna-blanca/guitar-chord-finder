@@ -116,7 +116,8 @@ render() {
 
 function mapStateToProps(state) {
   return {
-    selectedChord: state.selectedChord
+    selectedChord: state.selectedChord,
+    selectedDislpay: state.selectedDislpay
   }
 }
 
