@@ -36,6 +36,7 @@ componentDidMount() {
       // need to trigger clearing of inner HTML if in clear mode
     })
 
+
   }
 }
 
@@ -45,20 +46,22 @@ fretboardDisplay() {
 // ---- For filling all the sharp/flat frets with appropriate text
 console.log("in fretboardDisplay")
 console.log(this.props)
+console.log(this.props.selectedDislpay)
+// console.log(document.getElementById("sandbox"))
 
 
-
-// // ------------------
-//   if (this.props.selectedChord.selectedTone !== undefined) {
-//     let sharpsAndFlats = document.getElementsByClassName("sharp-or-flat")
-//     for (let i = 0; i < sharpsAndFlats.length; i++) {
-//       this.displayFretboardSharpsFlatsORClear(sharpsAndFlats[i].attributes.id.value)
-//     }
-//   }
+// ------------------
+  if (this.props.selectedDislpay !== undefined) {
+    let sharpsAndFlats = document.getElementsByClassName("sharp-or-flat")
+    for (let i = 0; i < sharpsAndFlats.length; i++) {
+      this.displayFretboardSharpsFlatsORClear(sharpsAndFlats[i].attributes.id.value)
+    }
+  }
+  else console.log("still undefined grrrrr")
 }
 
 displayFretboardSharpsFlatsORClear(inputID) {
-console.log(inputID)
+// console.log(inputID)
 // // ---- For changing the innerHTML of frets depending on the current tone
 //   let fretToAlter = document.getElementById(inputID)
 //     if (this.props.selectedChord.selectedTone === "#") {
@@ -237,7 +240,7 @@ this.displayChordNotes()
     <div className="fretboard">
 
     <div className="string" id="zero-string">
-        <div className="fret string0 fret00">0</div>
+        <div className="fret string0 fret00"></div>
         <div className="fret string0 fret01"></div>
         <div className="fret string0 fret02"></div>
         <div className="fret string0 fret03">3rd Fret</div>
@@ -372,8 +375,8 @@ this.displayChordNotes()
 
 function mapStateToProps(state) {
   return {
-    selectedChord: state.selectedChord,
-    selectedDislpay: state.selectedDislpay
+    selectedDislpay: state.selectedDislpay,
+    selectedChord: state.selectedChord
   }
 }
 

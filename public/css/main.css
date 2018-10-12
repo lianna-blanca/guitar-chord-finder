@@ -150,7 +150,7 @@ height: 19px;
 
 
 .fret00 {
-  border-right: 15px white solid;
+  padding-right: 15px;
   width: 50px;
   font-size: 1.1em;
 }

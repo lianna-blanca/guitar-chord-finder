@@ -1,9 +1,7 @@
-export const fretDisplayToState = (display) => {
+export const fretDisplayToState = (fretDisplay) => {
   return {
     type: "SELECT_DISPLAY",
-    display: {
-      fretDisplay: display
-    }
+    display: fretDisplay
   }
 }
 

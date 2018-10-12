@@ -99,12 +99,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var fretDisplayToState = exports.fretDisplayToState = function fretDisplayToState(display) {
+var fretDisplayToState = exports.fretDisplayToState = function fretDisplayToState(fretDisplay) {
   return {
     type: "SELECT_DISPLAY",
-    display: {
-      fretDisplay: display
-    }
+    display: fretDisplay
   };
 };
 
@@ -650,19 +648,22 @@ var Fretboard = function (_React$Component) {
       // ---- For filling all the sharp/flat frets with appropriate text
       console.log("in fretboardDisplay");
       console.log(this.props);
+      console.log(this.props.selectedDislpay);
+      // console.log(document.getElementById("sandbox"))
 
-      // // ------------------
-      //   if (this.props.selectedChord.selectedTone !== undefined) {
-      //     let sharpsAndFlats = document.getElementsByClassName("sharp-or-flat")
-      //     for (let i = 0; i < sharpsAndFlats.length; i++) {
-      //       this.displayFretboardSharpsFlatsORClear(sharpsAndFlats[i].attributes.id.value)
-      //     }
-      //   }
+
+      // ------------------
+      if (this.props.selectedDislpay !== undefined) {
+        var sharpsAndFlats = document.getElementsByClassName("sharp-or-flat");
+        for (var i = 0; i < sharpsAndFlats.length; i++) {
+          this.displayFretboardSharpsFlatsORClear(sharpsAndFlats[i].attributes.id.value);
+        }
+      } else console.log("still undefined grrrrr");
     }
   }, {
     key: "displayFretboardSharpsFlatsORClear",
     value: function displayFretboardSharpsFlatsORClear(inputID) {
-      console.log(inputID);
+      // console.log(inputID)
       // // ---- For changing the innerHTML of frets depending on the current tone
       //   let fretToAlter = document.getElementById(inputID)
       //     if (this.props.selectedChord.selectedTone === "#") {
@@ -852,11 +853,7 @@ var Fretboard = function (_React$Component) {
         _react2.default.createElement(
           "div",
           { className: "string", id: "zero-string" },
-          _react2.default.createElement(
-            "div",
-            { className: "fret string0 fret00" },
-            "0"
-          ),
+          _react2.default.createElement("div", { className: "fret string0 fret00" }),
           _react2.default.createElement("div", { className: "fret string0 fret01" }),
           _react2.default.createElement("div", { className: "fret string0 fret02" }),
           _react2.default.createElement(
@@ -1210,8 +1207,8 @@ var Fretboard = function (_React$Component) {
 
 function mapStateToProps(state) {
   return {
-    selectedChord: state.selectedChord,
-    selectedDislpay: state.selectedDislpay
+    selectedDislpay: state.selectedDislpay,
+    selectedChord: state.selectedChord
   };
 }
 
@@ -1292,12 +1289,10 @@ var _selectedDisplay2 = _interopRequireDefault(_selectedDisplay);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var reducers = (0, _redux.combineReducers)({
-  selectedChord: _selectedChord2.default,
-  selectedDisplay: _selectedDisplay2.default
+exports.default = (0, _redux.combineReducers)({
+  selectedDisplay: _selectedDisplay2.default,
+  selectedChord: _selectedChord2.default
 });
-
-exports.default = reducers;
 
 /***/ }),
 
@@ -1369,7 +1364,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 function selectedDisplay() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { fretDisplay: "clear" };
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "clear";
   var action = arguments[1];
 
   switch (action.type) {

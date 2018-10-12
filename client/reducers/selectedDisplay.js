@@ -1,4 +1,4 @@
-function selectedDisplay (state = {fretDisplay: "clear"}, action) {
+function selectedDisplay (state = "clear", action) {
   switch (action.type) {
     case "SELECT_DISPLAY": 
       return action.display
@@ -9,3 +9,4 @@ function selectedDisplay (state = {fretDisplay: "clear"}, action) {
 }
 
 export default selectedDisplay
+
