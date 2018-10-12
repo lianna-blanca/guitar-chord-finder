@@ -605,8 +605,7 @@ var Fretboard = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Fretboard.__proto__ || Object.getPrototypeOf(Fretboard)).call(this, props));
 
-    _this.fretboardDisplay = _this.fretboardDisplay.bind(_this);
-    _this.displayFretboardSharpsFlatsORClear = _this.displayFretboardSharpsFlatsORClear.bind(_this);
+    _this.fretDisplay = _this.fretDisplay.bind(_this);
     _this.displaySharp = _this.displaySharp.bind(_this);
     _this.displayFlat = _this.displayFlat.bind(_this);
     _this.getChordKey = _this.getChordKey.bind(_this);
@@ -639,42 +638,23 @@ var Fretboard = function (_React$Component) {
         });
       }
     }
-
-    // -----------------------------------------------------------
-
   }, {
-    key: "fretboardDisplay",
-    value: function fretboardDisplay() {
-      // ---- For filling all the sharp/flat frets with appropriate text
-      console.log("in fretboardDisplay");
-      console.log(this.props);
-      console.log(this.props.selectedChord); // this works fine
-      console.log(this.props.selectedDisplay); // this does not work
-
-
-      // ------------------
-      if (this.props.selectedDisplay !== undefined) {
-        var sharpsAndFlats = document.getElementsByClassName("sharp-or-flat");
-        for (var i = 0; i < sharpsAndFlats.length; i++) {
-          this.displayFretboardSharpsFlatsORClear(sharpsAndFlats[i].attributes.id.value);
+    key: "fretDisplay",
+    value: function fretDisplay() {
+      // ---- For changing the innerHTML of all frets depending on the display selected
+      var sharpsAndFlats = document.getElementsByClassName("sharp-or-flat");
+      for (var i = 0; i < sharpsAndFlats.length; i++) {
+        var IDofFretToAlter = document.getElementById(sharpsAndFlats[i].attributes.id.value);
+        if (this.props.selectedDisplay === "sharps") {
+          this.displaySharp(IDofFretToAlter);
         }
-      } else console.log("still undefined :(");
-    }
-  }, {
-    key: "displayFretboardSharpsFlatsORClear",
-    value: function displayFretboardSharpsFlatsORClear(inputID) {
-      // console.log(inputID)
-      // // ---- For changing the innerHTML of frets depending on the current tone
-      //   let fretToAlter = document.getElementById(inputID)
-      //     if (this.props.selectedChord.selectedTone === "#") {
-      //       this.displaySharp(fretToAlter)
-      //     }
-      //     else if (this.props.selectedChord.selectedTone === "b") {
-      //       this.displayFlat(fretToAlter)
-      //     }
-      //     if (this.props.selectedChord.selectedTone === "") {
-      //       fretToAlter.innerHTML = ""
-      //     }
+        if (this.props.selectedDisplay === "flats") {
+          this.displayFlat(IDofFretToAlter);
+        }
+        if (this.props.selectedDisplay === "clear") {
+          IDofFretToAlter.innerHTML = "";
+        }
+      }
     }
   }, {
     key: "displaySharp",
@@ -843,7 +823,7 @@ var Fretboard = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      this.fretboardDisplay();
+      this.fretDisplay();
       this.getFretsForChord();
       this.displayChordNotes();
 

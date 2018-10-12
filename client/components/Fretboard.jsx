@@ -8,8 +8,7 @@ class Fretboard extends React.Component {
   constructor(props){
     super(props)
 
-    this.fretboardDisplay = this.fretboardDisplay.bind(this)
-    this.displayFretboardSharpsFlatsORClear = this.displayFretboardSharpsFlatsORClear.bind(this)
+    this.fretDisplay = this.fretDisplay.bind(this)
     this.displaySharp = this.displaySharp.bind(this)
     this.displayFlat = this.displayFlat.bind(this)
     this.getChordKey = this.getChordKey.bind(this)
@@ -35,45 +34,27 @@ componentDidMount() {
       this.unLightNote(x.target.id)
       // need to trigger clearing of inner HTML if in clear mode
     })
+  }
 
+}
 
+fretDisplay() {
+// ---- For changing the innerHTML of all frets depending on the display selected
+  let sharpsAndFlats = document.getElementsByClassName("sharp-or-flat")
+  for (let i = 0; i < sharpsAndFlats.length; i++) {
+    let IDofFretToAlter = document.getElementById(sharpsAndFlats[i].attributes.id.value)
+      if (this.props.selectedDisplay === "sharps") {
+        this.displaySharp(IDofFretToAlter)
+      }
+      if (this.props.selectedDisplay === "flats") {
+        this.displayFlat(IDofFretToAlter)
+      }
+      if (this.props.selectedDisplay === "clear") {
+        IDofFretToAlter.innerHTML = ""
+      }
   }
 }
 
-// -----------------------------------------------------------
-
-fretboardDisplay() {
-// ---- For filling all the sharp/flat frets with appropriate text
-console.log("in fretboardDisplay")
-console.log(this.props)
-console.log(this.props.selectedChord) // this works fine
-console.log(this.props.selectedDisplay) // this does not work
-
-
-// ------------------
-  if (this.props.selectedDisplay !== undefined) {
-    let sharpsAndFlats = document.getElementsByClassName("sharp-or-flat")
-    for (let i = 0; i < sharpsAndFlats.length; i++) {
-      this.displayFretboardSharpsFlatsORClear(sharpsAndFlats[i].attributes.id.value)
-    }
-  }
-  else console.log("still undefined :(")
-}
-
-displayFretboardSharpsFlatsORClear(inputID) {
-// console.log(inputID)
-// // ---- For changing the innerHTML of frets depending on the current tone
-//   let fretToAlter = document.getElementById(inputID)
-//     if (this.props.selectedChord.selectedTone === "#") {
-//       this.displaySharp(fretToAlter)
-//     }
-//     else if (this.props.selectedChord.selectedTone === "b") {
-//       this.displayFlat(fretToAlter)
-//     }
-//     if (this.props.selectedChord.selectedTone === "") {
-//       fretToAlter.innerHTML = ""
-//     }
-}
 
 displaySharp(fretToAlter) {
 // ---- For displaying the sharp name of a fret
@@ -232,7 +213,7 @@ unLightNote(incomingID) {
 }
 
 render() {
-this.fretboardDisplay()
+this.fretDisplay()
 this.getFretsForChord()
 this.displayChordNotes()
 
