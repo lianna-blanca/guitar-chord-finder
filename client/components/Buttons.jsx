@@ -23,7 +23,7 @@ class Buttons extends React.Component {
     for (let i = 0; i < toneClass.length; i++) {
       toneClass[i].addEventListener("click", (x) => {
         this.props.dispatch(toneToState(x.target.value))
-        // add default state once fretboard display buttons are working
+        this.defaultState()
       })
     }
 

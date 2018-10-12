@@ -316,7 +316,7 @@ var Buttons = function (_React$Component) {
       for (var _i = 0; _i < toneClass.length; _i++) {
         toneClass[_i].addEventListener("click", function (x) {
           _this2.props.dispatch((0, _actions.toneToState)(x.target.value));
-          // add default state once fretboard display buttons are working
+          _this2.defaultState();
         });
       }
 
