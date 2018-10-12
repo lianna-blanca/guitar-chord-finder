@@ -1,9 +1,8 @@
-const initialState = {
+const initialState = {}
 
-}
-
-function selectedChord(state = initialState, action) {
+function selectedChord (state = initialState, action) {
   switch (action.type) {
+
     case "SELECT_CHORD":
       return action.chord
       

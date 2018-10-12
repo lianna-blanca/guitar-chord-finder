@@ -99,6 +99,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var fretDisplayToState = exports.fretDisplayToState = function fretDisplayToState(fretDisplay) {
+  return {
+    type: "SELECT_DISPLAY",
+    display: fretDisplay
+  };
+};
+
 var entireChordToState = exports.entireChordToState = function entireChordToState(key, tone, quality) {
   return {
     type: "SELECT_CHORD",
@@ -188,15 +195,13 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
 var _Fretboard = __webpack_require__(/*! ./Fretboard */ "./client/components/Fretboard.jsx");
 
 var _Fretboard2 = _interopRequireDefault(_Fretboard);
 
-var _KeyChordButtons = __webpack_require__(/*! ./KeyChordButtons */ "./client/components/KeyChordButtons.jsx");
+var _Buttons = __webpack_require__(/*! ./Buttons */ "./client/components/Buttons.jsx");
 
-var _KeyChordButtons2 = _interopRequireDefault(_KeyChordButtons);
+var _Buttons2 = _interopRequireDefault(_Buttons);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -205,6 +210,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import {connect} from 'react-redux'
+
 
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
@@ -227,7 +234,7 @@ var App = function (_React$Component) {
           "Guitar HeroKu"
         ),
         _react2.default.createElement(_Fretboard2.default, null),
-        _react2.default.createElement(_KeyChordButtons2.default, null)
+        _react2.default.createElement(_Buttons2.default, null)
       );
     }
   }]);
@@ -235,13 +242,316 @@ var App = function (_React$Component) {
   return App;
 }(_react2.default.Component);
 
+// function mapStateToProps(state) {
+//   return {
+//     reducerName: state.reducerName
+//   }
+// }
+
+// export default connect(mapStateToProps)(App)
+
+exports.default = App;
+
+/***/ }),
+
+/***/ "./client/components/Buttons.jsx":
+/*!***************************************!*\
+  !*** ./client/components/Buttons.jsx ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Buttons = function (_React$Component) {
+  _inherits(Buttons, _React$Component);
+
+  function Buttons(props) {
+    _classCallCheck(this, Buttons);
+
+    var _this = _possibleConstructorReturn(this, (Buttons.__proto__ || Object.getPrototypeOf(Buttons)).call(this, props));
+
+    _this.defaultState = _this.defaultState.bind(_this);
+    return _this;
+  }
+
+  _createClass(Buttons, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      // ---- Event listeners to trigger redux action on click
+      var keyClass = document.getElementsByClassName("key");
+      for (var i = 0; i < keyClass.length; i++) {
+        keyClass[i].addEventListener("click", function (x) {
+          _this2.props.dispatch((0, _actions.keyToState)(x.target.value));
+          _this2.defaultState();
+        });
+      }
+
+      var toneClass = document.getElementsByClassName("tone");
+      for (var _i = 0; _i < toneClass.length; _i++) {
+        toneClass[_i].addEventListener("click", function (x) {
+          _this2.props.dispatch((0, _actions.toneToState)(x.target.value));
+          _this2.defaultState();
+        });
+      }
+
+      var qualityClass = document.getElementsByClassName("quality");
+      for (var _i2 = 0; _i2 < qualityClass.length; _i2++) {
+        qualityClass[_i2].addEventListener("click", function (x) {
+          _this2.props.dispatch((0, _actions.qualityToState)(x.target.value));
+          _this2.defaultState();
+        });
+      }
+
+      var fretboardDisplay = document.getElementsByClassName("fretboard-tone");
+      for (var _i3 = 0; _i3 < fretboardDisplay.length; _i3++) {
+        fretboardDisplay[_i3].addEventListener("click", function (x) {
+          _this2.props.dispatch((0, _actions.fretDisplayToState)(x.target.value));
+        });
+      }
+    }
+  }, {
+    key: "defaultState",
+    value: function defaultState() {
+      if (!this.props.selectedChord.selectedKey) this.props.dispatch((0, _actions.keyToState)("C"));
+      if (!this.props.selectedChord.selectedTone) this.props.dispatch((0, _actions.toneToState)(""));
+      if (!this.props.selectedChord.selectedQuality) this.props.dispatch((0, _actions.qualityToState)("maj"));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "keyChordContainer" },
+        _react2.default.createElement(
+          "div",
+          { className: "row" },
+          _react2.default.createElement(
+            "div",
+            { id: "chord-display" },
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Selected Chord:"
+              ),
+              " ",
+              this.props.selectedChord.selectedKey,
+              this.props.selectedChord.selectedTone,
+              this.props.selectedChord.selectedQuality
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { id: "note-display" },
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "strong",
+                null,
+                "Notes:"
+              ),
+              " ",
+              _react2.default.createElement("span", { id: "note-display-text" })
+            )
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "display-selection" },
+          _react2.default.createElement(
+            "h4",
+            null,
+            "Fretboard notes:"
+          ),
+          _react2.default.createElement(
+            "button",
+            { className: "fretboard-tone", type: "button", value: "sharps" },
+            "#"
+          ),
+          _react2.default.createElement(
+            "button",
+            { className: "fretboard-tone", type: "button", value: "flats" },
+            "b"
+          ),
+          _react2.default.createElement(
+            "button",
+            { className: "fretboard-tone", type: "button", value: "clear" },
+            "clear"
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { className: "chord-selection" },
+          _react2.default.createElement(
+            "h4",
+            null,
+            "Select chord:"
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "chord-buttons-row" },
+            _react2.default.createElement(
+              "div",
+              { className: "key-row" },
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "C" },
+                "C"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "D" },
+                "D"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "E" },
+                "E"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "F" },
+                "F"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "G" },
+                "G"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "A" },
+                "A"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "key", type: "button", value: "B" },
+                "B"
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "tone-row" },
+              _react2.default.createElement(
+                "button",
+                { className: "tone", type: "button", value: "#" },
+                "#"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "tone", type: "button", value: "b" },
+                "b"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "tone", type: "button", value: "" },
+                "clear"
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "chord-buttons-row" },
+            _react2.default.createElement(
+              "div",
+              { className: "quality-row" },
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "maj" },
+                "M / maj"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "m" },
+                "m / min"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "7" },
+                "7"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "maj7" },
+                "M7 / maj7"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "m7" },
+                "m7 / min7"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "dim" },
+                "dim"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "dim7" },
+                "dim7"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "aug" },
+                "aug"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "sus2" },
+                "sus2"
+              ),
+              _react2.default.createElement(
+                "button",
+                { className: "quality", type: "button", value: "sus4" },
+                "sus4"
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Buttons;
+}(_react2.default.Component);
+
 function mapStateToProps(state) {
   return {
-    reducerName: state.reducerName
+    selectedChord: state.selectedChord,
+    selectedDislpay: state.selectedDislpay
   };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(Buttons);
 
 /***/ }),
 
@@ -295,8 +605,7 @@ var Fretboard = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Fretboard.__proto__ || Object.getPrototypeOf(Fretboard)).call(this, props));
 
-    _this.stateOfSharpFlats = _this.stateOfSharpFlats.bind(_this);
-    _this.displaySharpOrFlat = _this.displaySharpOrFlat.bind(_this);
+    _this.fretDisplay = _this.fretDisplay.bind(_this);
     _this.displaySharp = _this.displaySharp.bind(_this);
     _this.displayFlat = _this.displayFlat.bind(_this);
     _this.getChordKey = _this.getChordKey.bind(_this);
@@ -321,35 +630,30 @@ var Fretboard = function (_React$Component) {
       for (var i = 0; i < frets.length; i++) {
         frets[i].addEventListener("click", function (x) {
           _this2.lightUpNote(x.target.id);
+          // need to trigger writing of inner HTML if in clear mode
         });
         frets[i].addEventListener("dblclick", function (x) {
           _this2.unLightNote(x.target.id);
+          // need to trigger clearing of inner HTML if in clear mode
         });
       }
     }
   }, {
-    key: "stateOfSharpFlats",
-    value: function stateOfSharpFlats() {
-      // ---- For filling the sharp/flat frets with appropriate tex
-      if (this.props.selectedChord.selectedTone !== undefined) {
-        var sharpsAndFlats = document.getElementsByClassName("sharp-or-flat");
-        for (var i = 0; i < sharpsAndFlats.length; i++) {
-          this.displaySharpOrFlat(sharpsAndFlats[i].attributes.id.value);
+    key: "fretDisplay",
+    value: function fretDisplay() {
+      // ---- For changing the innerHTML of all frets depending on the display selected
+      var sharpsAndFlats = document.getElementsByClassName("sharp-or-flat");
+      for (var i = 0; i < sharpsAndFlats.length; i++) {
+        var IDofFretToAlter = document.getElementById(sharpsAndFlats[i].attributes.id.value);
+        if (this.props.selectedDisplay === "sharps") {
+          this.displaySharp(IDofFretToAlter);
         }
-      }
-    }
-  }, {
-    key: "displaySharpOrFlat",
-    value: function displaySharpOrFlat(inputID) {
-      // ---- For changing the innerHTML of frets depending on the current tone
-      var fretToAlter = document.getElementById(inputID);
-      if (this.props.selectedChord.selectedTone === "#") {
-        this.displaySharp(fretToAlter);
-      } else if (this.props.selectedChord.selectedTone === "b") {
-        this.displayFlat(fretToAlter);
-      }
-      if (this.props.selectedChord.selectedTone === "") {
-        fretToAlter.innerHTML = "";
+        if (this.props.selectedDisplay === "flats") {
+          this.displayFlat(IDofFretToAlter);
+        }
+        if (this.props.selectedDisplay === "clear") {
+          IDofFretToAlter.innerHTML = "";
+        }
       }
     }
   }, {
@@ -478,6 +782,9 @@ var Fretboard = function (_React$Component) {
         }
       }
     }
+
+    // -----------------------------------------------------------
+
   }, {
     key: "displayChordNotes",
     value: function displayChordNotes() {
@@ -516,7 +823,7 @@ var Fretboard = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      this.stateOfSharpFlats();
+      this.fretDisplay();
       this.getFretsForChord();
       this.displayChordNotes();
 
@@ -526,11 +833,7 @@ var Fretboard = function (_React$Component) {
         _react2.default.createElement(
           "div",
           { className: "string", id: "zero-string" },
-          _react2.default.createElement(
-            "div",
-            { className: "fret string0 fret00" },
-            "0"
-          ),
+          _react2.default.createElement("div", { className: "fret string0 fret00" }),
           _react2.default.createElement("div", { className: "fret string0 fret01" }),
           _react2.default.createElement("div", { className: "fret string0 fret02" }),
           _react2.default.createElement(
@@ -884,238 +1187,12 @@ var Fretboard = function (_React$Component) {
 
 function mapStateToProps(state) {
   return {
+    selectedDisplay: state.selectedDisplay,
     selectedChord: state.selectedChord
   };
 }
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps)(Fretboard);
-
-/***/ }),
-
-/***/ "./client/components/KeyChordButtons.jsx":
-/*!***********************************************!*\
-  !*** ./client/components/KeyChordButtons.jsx ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _actions = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var KeyChordButtons = function (_React$Component) {
-  _inherits(KeyChordButtons, _React$Component);
-
-  function KeyChordButtons(props) {
-    _classCallCheck(this, KeyChordButtons);
-
-    return _possibleConstructorReturn(this, (KeyChordButtons.__proto__ || Object.getPrototypeOf(KeyChordButtons)).call(this, props));
-  }
-
-  _createClass(KeyChordButtons, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      // ---- Event listeners to trigger redux action on click
-      var keyClass = document.getElementsByClassName("key");
-      for (var i = 0; i < keyClass.length; i++) {
-        keyClass[i].addEventListener("click", function (x) {
-          _this2.props.dispatch((0, _actions.keyToState)(x.target.value));
-        });
-      }
-
-      var toneClass = document.getElementsByClassName("tone");
-      for (var _i = 0; _i < toneClass.length; _i++) {
-        toneClass[_i].addEventListener("click", function (x) {
-          _this2.props.dispatch((0, _actions.toneToState)(x.target.value));
-        });
-      }
-
-      var qualityClass = document.getElementsByClassName("quality");
-      for (var _i2 = 0; _i2 < qualityClass.length; _i2++) {
-        qualityClass[_i2].addEventListener("click", function (x) {
-          _this2.props.dispatch((0, _actions.qualityToState)(x.target.value));
-        });
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        { className: "keyChordContainer" },
-        _react2.default.createElement(
-          "div",
-          { className: "row" },
-          _react2.default.createElement(
-            "div",
-            { id: "chord-display" },
-            _react2.default.createElement(
-              "p",
-              null,
-              _react2.default.createElement(
-                "strong",
-                null,
-                "Selected Chord:"
-              ),
-              " ",
-              this.props.selectedChord.selectedKey,
-              this.props.selectedChord.selectedTone,
-              this.props.selectedChord.selectedQuality
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { id: "note-display" },
-            _react2.default.createElement(
-              "p",
-              null,
-              _react2.default.createElement(
-                "strong",
-                null,
-                "Notes:"
-              ),
-              " ",
-              _react2.default.createElement("span", { id: "note-display-text" })
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "chord-buttons-row" },
-          _react2.default.createElement(
-            "div",
-            { className: "key-row" },
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "C" },
-              "C"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "D" },
-              "D"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "E" },
-              "E"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "F" },
-              "F"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "G" },
-              "G"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "A" },
-              "A"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "key", type: "button", value: "B" },
-              "B"
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "tone-row" },
-            _react2.default.createElement(
-              "button",
-              { className: "tone", type: "button", value: "#" },
-              "#"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "tone", type: "button", value: "b" },
-              "b"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "tone", type: "button", value: "" },
-              "clear"
-            )
-          )
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "chord-buttons-row" },
-          _react2.default.createElement(
-            "div",
-            { className: "quality-row" },
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "maj" },
-              "M / maj"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "m" },
-              "m / min"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "7" },
-              "7"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "maj7" },
-              "M7 / maj7"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "m7" },
-              "m7 / min7"
-            ),
-            _react2.default.createElement(
-              "button",
-              { className: "quality", type: "button", value: "dim" },
-              "dim"
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return KeyChordButtons;
-}(_react2.default.Component);
-
-function mapStateToProps(state) {
-  return {
-    selectedChord: state.selectedChord
-  };
-}
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(KeyChordButtons);
 
 /***/ }),
 
@@ -1186,13 +1263,16 @@ var _selectedChord = __webpack_require__(/*! ./selectedChord */ "./client/reduce
 
 var _selectedChord2 = _interopRequireDefault(_selectedChord);
 
+var _selectedDisplay = __webpack_require__(/*! ./selectedDisplay */ "./client/reducers/selectedDisplay.js");
+
+var _selectedDisplay2 = _interopRequireDefault(_selectedDisplay);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var reducers = (0, _redux.combineReducers)({
+exports.default = (0, _redux.combineReducers)({
+  selectedDisplay: _selectedDisplay2.default,
   selectedChord: _selectedChord2.default
 });
-
-exports.default = reducers;
 
 /***/ }),
 
@@ -1216,6 +1296,7 @@ function selectedChord() {
   var action = arguments[1];
 
   switch (action.type) {
+
     case "SELECT_CHORD":
       return action.chord;
 
@@ -1246,6 +1327,36 @@ function selectedChord() {
 }
 
 exports.default = selectedChord;
+
+/***/ }),
+
+/***/ "./client/reducers/selectedDisplay.js":
+/*!********************************************!*\
+  !*** ./client/reducers/selectedDisplay.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function selectedDisplay() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "clear";
+  var action = arguments[1];
+
+  switch (action.type) {
+    case "SELECT_DISPLAY":
+      return action.display;
+
+    default:
+      return state;
+  }
+}
+
+exports.default = selectedDisplay;
 
 /***/ }),
 

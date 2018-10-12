@@ -1,5 +1,5 @@
 import React from "react"
-import {connect} from 'react-redux'
+// import {connect} from 'react-redux'
 import Fretboard from "./Fretboard"
 import Buttons from "./Buttons"
 
@@ -19,10 +19,12 @@ class App extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    reducerName: state.reducerName
-  }
-}
+// function mapStateToProps(state) {
+//   return {
+//     reducerName: state.reducerName
+//   }
+// }
 
-export default connect(mapStateToProps)(App)
+// export default connect(mapStateToProps)(App)
+
+export default App

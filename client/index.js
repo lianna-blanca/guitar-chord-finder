@@ -5,10 +5,10 @@ import {Provider} from "react-redux"
 import thunk from "redux-thunk";
 
 import App from "./components/App"
-import reducer from "./reducers"
+import reducers from "./reducers"
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducer, composeEnhancers(
+const store = createStore(reducers, composeEnhancers(
   applyMiddleware(thunk)
 ))
 

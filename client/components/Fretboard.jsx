@@ -8,8 +8,7 @@ class Fretboard extends React.Component {
   constructor(props){
     super(props)
 
-    this.stateOfSharpFlats = this.stateOfSharpFlats.bind(this)
-    this.displaySharpOrFlat = this.displaySharpOrFlat.bind(this)
+    this.fretDisplay = this.fretDisplay.bind(this)
     this.displaySharp = this.displaySharp.bind(this)
     this.displayFlat = this.displayFlat.bind(this)
     this.getChordKey = this.getChordKey.bind(this)
@@ -29,37 +28,33 @@ componentDidMount() {
   for (let i = 0; i < frets.length; i++) {
     frets[i].addEventListener("click", (x) => {
       this.lightUpNote(x.target.id)
+      // need to trigger writing of inner HTML if in clear mode
     })
     frets[i].addEventListener("dblclick", (x) => {
       this.unLightNote(x.target.id)
+      // need to trigger clearing of inner HTML if in clear mode
     })
+  }
 
+}
+
+fretDisplay() {
+// ---- For changing the innerHTML of all frets depending on the display selected
+  let sharpsAndFlats = document.getElementsByClassName("sharp-or-flat")
+  for (let i = 0; i < sharpsAndFlats.length; i++) {
+    let IDofFretToAlter = document.getElementById(sharpsAndFlats[i].attributes.id.value)
+      if (this.props.selectedDisplay === "sharps") {
+        this.displaySharp(IDofFretToAlter)
+      }
+      if (this.props.selectedDisplay === "flats") {
+        this.displayFlat(IDofFretToAlter)
+      }
+      if (this.props.selectedDisplay === "clear") {
+        IDofFretToAlter.innerHTML = ""
+      }
   }
 }
 
-stateOfSharpFlats() {
-// ---- For filling the sharp/flat frets with appropriate tex
-  if (this.props.selectedChord.selectedTone !== undefined) {
-    let sharpsAndFlats = document.getElementsByClassName("sharp-or-flat")
-    for (let i = 0; i < sharpsAndFlats.length; i++) {
-      this.displaySharpOrFlat(sharpsAndFlats[i].attributes.id.value)
-    }
-  }
-}
-
-displaySharpOrFlat(inputID) {
-// ---- For changing the innerHTML of frets depending on the current tone
-  let fretToAlter = document.getElementById(inputID)
-    if (this.props.selectedChord.selectedTone === "#") {
-      this.displaySharp(fretToAlter)
-    }
-    else if (this.props.selectedChord.selectedTone === "b") {
-      this.displayFlat(fretToAlter)
-    }
-    if (this.props.selectedChord.selectedTone === "") {
-      fretToAlter.innerHTML = ""
-    }
-}
 
 displaySharp(fretToAlter) {
 // ---- For displaying the sharp name of a fret
@@ -183,6 +178,7 @@ clearLitNotes() {
   }
 }
 
+// -----------------------------------------------------------
 displayChordNotes() {
   let chordNotes = Chord.notes(this.getChordKey(), this.props.selectedChord.selectedQuality)
   if (chordNotes.length > 0) {
@@ -217,7 +213,7 @@ unLightNote(incomingID) {
 }
 
 render() {
-this.stateOfSharpFlats()
+this.fretDisplay()
 this.getFretsForChord()
 this.displayChordNotes()
 
@@ -225,7 +221,7 @@ this.displayChordNotes()
     <div className="fretboard">
 
     <div className="string" id="zero-string">
-        <div className="fret string0 fret00">0</div>
+        <div className="fret string0 fret00"></div>
         <div className="fret string0 fret01"></div>
         <div className="fret string0 fret02"></div>
         <div className="fret string0 fret03">3rd Fret</div>
@@ -360,6 +356,7 @@ this.displayChordNotes()
 
 function mapStateToProps(state) {
   return {
+    selectedDisplay: state.selectedDisplay,
     selectedChord: state.selectedChord
   }
 }

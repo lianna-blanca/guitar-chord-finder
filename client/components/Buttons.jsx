@@ -1,10 +1,11 @@
 import React from "react";
 import {connect} from "react-redux"
-import {keyToState, toneToState, qualityToState} from "../actions"
+import {keyToState, toneToState, qualityToState, fretDisplayToState} from "../actions"
 
 class Buttons extends React.Component {
   constructor(props) {
     super(props);
+    this.defaultState = this.defaultState.bind(this)
   }
 
   componentDidMount(){
@@ -14,6 +15,7 @@ class Buttons extends React.Component {
     for (let i = 0; i < keyClass.length; i++) {
       keyClass[i].addEventListener("click", (x) => {
         this.props.dispatch(keyToState(x.target.value))
+        this.defaultState()
       })
     }
 
@@ -21,6 +23,7 @@ class Buttons extends React.Component {
     for (let i = 0; i < toneClass.length; i++) {
       toneClass[i].addEventListener("click", (x) => {
         this.props.dispatch(toneToState(x.target.value))
+        this.defaultState()
       })
     }
 
@@ -28,13 +31,28 @@ class Buttons extends React.Component {
     for (let i = 0; i < qualityClass.length; i++) {
       qualityClass[i].addEventListener("click", (x) => {
         this.props.dispatch(qualityToState(x.target.value))
+        this.defaultState()
+      })
+    }
+
+    let fretboardDisplay = document.getElementsByClassName("fretboard-tone")
+    for (let i = 0; i < fretboardDisplay.length; i++) {
+      fretboardDisplay[i].addEventListener("click", (x) => {
+        this.props.dispatch(fretDisplayToState(x.target.value))
       })
     }
   }
 
+defaultState() {
+  if (!this.props.selectedChord.selectedKey) this.props.dispatch(keyToState("C"))
+  if (!this.props.selectedChord.selectedTone) this.props.dispatch(toneToState(""))
+  if (!this.props.selectedChord.selectedQuality) this.props.dispatch(qualityToState("maj"))
+}
+
 render() { 
   return (
   <div className="keyChordContainer">
+{/* <div id="sandbox">sandbox</div> */}
 
   <div className="row">
     <div id="chord-display">
@@ -46,6 +64,15 @@ render() {
     </div>
   </div>
 
+  <div className="display-selection">
+  <h4>Fretboard notes:</h4>
+        <button className="fretboard-tone" type="button" value="sharps">#</button>
+        <button className="fretboard-tone" type="button" value="flats">b</button>
+        <button className="fretboard-tone" type="button" value="clear">clear</button>
+  </div>
+
+  <div className="chord-selection">
+  <h4>Select chord:</h4>
     <div className="chord-buttons-row">
       <div className="key-row">
         <button className="key" type="button" value="C">C</button>
@@ -83,13 +110,15 @@ render() {
 
     </div>
   </div>
+  </div>
   )
 }
 }
 
 function mapStateToProps(state) {
   return {
-    selectedChord: state.selectedChord
+    selectedChord: state.selectedChord,
+    selectedDislpay: state.selectedDislpay
   }
 }
 
