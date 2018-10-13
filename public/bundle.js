@@ -611,7 +611,7 @@ var Fretboard = function (_React$Component) {
     _this.getChordKey = _this.getChordKey.bind(_this);
     _this.getFretsForChord = _this.getFretsForChord.bind(_this);
     _this.translateEnharmonics = _this.translateEnharmonics.bind(_this);
-    _this.getURLforAPI = _this.getURLforAPI.bind(_this);
+    _this.getKeyURLformat = _this.getKeyURLformat.bind(_this);
     _this.translateFretArrayToStrings = _this.translateFretArrayToStrings.bind(_this);
     _this.clearLitNotes = _this.clearLitNotes.bind(_this);
     _this.displayChordNotes = _this.displayChordNotes.bind(_this);
@@ -721,16 +721,11 @@ var Fretboard = function (_React$Component) {
 
       // --- For fetching the fret positions to light up each chord.
       this.clearLitNotes();
-
-      var chordKey = this.getChordKey();
-      var chordKeyForAPI = this.translateEnharmonics(chordKey); // e.g. C3 -> Db as API does not deal in sharps
-      var chordQuality = this.props.selectedChord.selectedQuality || "";
-
-      var URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality);
+      var URLchordKey = this.getKeyURLformat();
 
       // use two; try from database, if no response, use API AS IT WAS
 
-      (0, _chordAPI.getAPIChordFrets)(URLforAPI).then(function (res) {
+      (0, _chordAPI.getAPIChordFrets)(URLchordKey).then(function (res) {
         // console.log(res.text)
         if (res.body.length > 0) {
           var fretData = (res.body[0].strings || "").split(" ");
@@ -739,24 +734,27 @@ var Fretboard = function (_React$Component) {
       });
     }
   }, {
-    key: "translateEnharmonics",
-    value: function translateEnharmonics(chordKey) {
-      // ---- To convert keys with sharps to flats so they work for API
-      if (chordKey != undefined && chordKey.includes("#") || chordKey != undefined && chordKey.includes("Cb") || chordKey != undefined && chordKey.includes("Fb")) {
-        return Note.enharmonic(chordKey);
-      } else return chordKey;
-    }
-  }, {
-    key: "getURLforAPI",
-    value: function getURLforAPI(chordKeyForAPI, chordQuality) {
+    key: "getKeyURLformat",
+    value: function getKeyURLformat() {
       // ---- For formatting the API call correctly
-      if (chordQuality === "maj" || chordQuality === "") {
+      var chordKeyForAPI = this.translateEnharmonics(this.getChordKey());
+      var chordQuality = this.props.selectedChord.selectedQuality;
+
+      if (chordQuality === "maj") {
         var URLforAPI = chordKeyForAPI;
         return URLforAPI;
       } else {
         var _URLforAPI = chordKeyForAPI + "_" + chordQuality;
         return _URLforAPI;
       }
+    }
+  }, {
+    key: "translateEnharmonics",
+    value: function translateEnharmonics(chordKey) {
+      // ---- To convert keys with sharps to flats (e.g. C3 -> Db) as API does not deal in sharps
+      if (chordKey != undefined && chordKey.includes("#") || chordKey != undefined && chordKey.includes("Cb") || chordKey != undefined && chordKey.includes("Fb")) {
+        return Note.enharmonic(chordKey);
+      } else return chordKey;
     }
   }, {
     key: "translateFretArrayToStrings",
@@ -785,9 +783,6 @@ var Fretboard = function (_React$Component) {
         }
       }
     }
-
-    // -----------------------------------------------------------
-
   }, {
     key: "displayChordNotes",
     value: function displayChordNotes() {

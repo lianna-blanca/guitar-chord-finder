@@ -14,7 +14,7 @@ class Fretboard extends React.Component {
     this.getChordKey = this.getChordKey.bind(this)
     this.getFretsForChord = this.getFretsForChord.bind(this)
     this.translateEnharmonics = this.translateEnharmonics.bind(this)
-    this.getURLforAPI = this.getURLforAPI.bind(this)
+    this.getKeyURLformat = this.getKeyURLformat.bind(this)
     this.translateFretArrayToStrings = this.translateFretArrayToStrings.bind(this)
     this.clearLitNotes = this.clearLitNotes.bind(this)
     this.displayChordNotes = this.displayChordNotes.bind(this)
@@ -116,16 +116,11 @@ getChordKey() {
 getFretsForChord() {
 // --- For fetching the fret positions to light up each chord.
   this.clearLitNotes()
-
-  let chordKey = this.getChordKey()
-  let chordKeyForAPI = this.translateEnharmonics(chordKey) // e.g. C3 -> Db as API does not deal in sharps
-  let chordQuality = this.props.selectedChord.selectedQuality || ""
-
-  let URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality)
+  let URLchordKey = this.getKeyURLformat()
 
 // use two; try from database, if no response, use API AS IT WAS
 
-  getAPIChordFrets(URLforAPI)
+  getAPIChordFrets(URLchordKey)
   .then(res => {
     // console.log(res.text)
     if (res.body.length > 0) {
@@ -135,17 +130,12 @@ getFretsForChord() {
   })
 }
 
-translateEnharmonics(chordKey) {
-// ---- To convert keys with sharps to flats so they work for API
-  if (chordKey != undefined && chordKey.includes("#") || chordKey != undefined && chordKey.includes("Cb") || chordKey != undefined && chordKey.includes("Fb")) {
-    return Note.enharmonic(chordKey)
-  }
-  else return chordKey
-}
-
-getURLforAPI(chordKeyForAPI, chordQuality) {
+getKeyURLformat() {
 // ---- For formatting the API call correctly
-  if (chordQuality === "maj" || chordQuality === "") {
+  let chordKeyForAPI = this.translateEnharmonics(this.getChordKey()) 
+  let chordQuality = this.props.selectedChord.selectedQuality
+
+  if (chordQuality === "maj") {
     let URLforAPI = chordKeyForAPI
     return URLforAPI
     }
@@ -153,6 +143,14 @@ getURLforAPI(chordKeyForAPI, chordQuality) {
     let URLforAPI = chordKeyForAPI + "_" + chordQuality
     return URLforAPI
   }
+}
+
+translateEnharmonics(chordKey) {
+// ---- To convert keys with sharps to flats (e.g. C3 -> Db) as API does not deal in sharps
+  if (chordKey != undefined && chordKey.includes("#") || chordKey != undefined && chordKey.includes("Cb") || chordKey != undefined && chordKey.includes("Fb")) {
+    return Note.enharmonic(chordKey)
+  }
+  else return chordKey
 }
 
 translateFretArrayToStrings(fretArray) {
@@ -181,7 +179,6 @@ clearLitNotes() {
   }
 }
 
-// -----------------------------------------------------------
 displayChordNotes() {
   let chordNotes = Chord.notes(this.getChordKey(), this.props.selectedChord.selectedQuality)
   if (chordNotes.length > 0) {
