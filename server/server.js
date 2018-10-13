@@ -10,6 +10,9 @@ server.use(express.static(path.join(__dirname, "..", "public")))
 const endpoint = "https://api.uberchord.com/v1/chords/"
 const request = require('superagent')
 
+// const exampleRoutes = require("./routes/routeName");
+// server.use("/api/v1/route", exampleRoutes)
+
 
 server.get('/v1/chords/:chord', (req, res) => {
     // res.json([{strings: "X 3 2 0 1 0"}])
