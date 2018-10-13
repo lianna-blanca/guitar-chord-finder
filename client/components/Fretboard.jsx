@@ -123,8 +123,11 @@ getFretsForChord() {
 
   let URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality)
 
+// use two; try from database, if no response, use API AS IT WAS
+
   getAPIChordFrets(URLforAPI)
   .then(res => {
+    // console.log(res.text)
     if (res.body.length > 0) {
       let fretData = (res.body[0].strings || "").split(" ")
       this.translateFretArrayToStrings(fretData)

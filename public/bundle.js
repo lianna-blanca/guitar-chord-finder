@@ -728,7 +728,10 @@ var Fretboard = function (_React$Component) {
 
       var URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality);
 
+      // use two; try from database, if no response, use API AS IT WAS
+
       (0, _chordAPI.getAPIChordFrets)(URLforAPI).then(function (res) {
+        // console.log(res.text)
         if (res.body.length > 0) {
           var fretData = (res.body[0].strings || "").split(" ");
           _this3.translateFretArrayToStrings(fretData);

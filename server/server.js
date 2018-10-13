@@ -16,21 +16,24 @@ const request = require('superagent')
 
 
 server.get('/v1/chords/:chord', (req, res) => {
-  console.log("in server: req.params.chord is", req.params.chord)
-    // res.json([{strings: "X 3 2 0 1 0"}])
-    // api.getChord(req.params.chord)
-    db.getChord(req.params.chord)
+  api.getChord(req.params.chord)
+  // request
+  //   .get(`${endpoint}/${req.params.chord}`)
+  .then(response => {
+    res.json(response.body)
+  })
 
-    // request
-    //   .get(`${endpoint}/${req.params.chord}`)
-    .then(response => {
-      console.log("in server: response is", response)
-      // res.json(response.body)
-    })
-    .catch(err => {
-      console.log({err})
-    })
+
+  // db.getChord(req.params.chord)
+  //  .then(response => {
+  //     if (response !== undefined) {
+  //     console.log("in server: response is", response)
+  //     res.send(response[0].chordFretPositions)
+  //     }
+  //   })
+  .catch(err => {
+    console.log({err})
+  })
 })
-
 
 module.exports = server
