@@ -4,27 +4,23 @@ const knex = require("knex")
 const config = require("../../knexfile")[process.env.NODE_ENV || 'development']
 const dbConnection = knex(config)
 
-function getThing() {
-  return dbConnection("knexTable")
+function getChord(calledChord) {
+  return dbConnection("chord_table")
   .then(tableData => {
-// console.log("------------ db/dbFunctions.js --------")
-// console.log(tableData)
-
-
-    return tableData.map(dbObject => {
-
-// parse stringified data
-      dbObject.stringifiedThing = JSON.parse(dbObject.stringifiedThing)
-
-// change key in object:
-      dbObject.parsedThing = dbObject.stringifiedThing
-
-      return dbObject
+    return tableData.map(chordObject => {
+      if (chordObject.chordKey === calledChord) {
+        console.log("MATCH!", chordObject.chordFretPositions)
+        return chordObject.chordFretPositions
+      }
+      // else console.error("Error; chord not found"); // later use for getting API and adding to DB      
     })
+  })
+  .catch(err => {
+    console.log({err})
   })
 }
 
 module.exports = {
-  getThing
+  getChord
 }
 

@@ -1,7 +1,8 @@
 const express = require("express")
 const path = require("path")
 const server = express()
-const api = require('./api')
+const api = require("./api")
+const db = require("./db/dbFunctions")
 
 //Middleware
 server.use(express.json())
@@ -15,13 +16,16 @@ const request = require('superagent')
 
 
 server.get('/v1/chords/:chord', (req, res) => {
+  console.log("in server: req.params.chord is", req.params.chord)
     // res.json([{strings: "X 3 2 0 1 0"}])
-    api.getChord(req.params.chord)
+    // api.getChord(req.params.chord)
+    db.getChord(req.params.chord)
 
     // request
     //   .get(`${endpoint}/${req.params.chord}`)
     .then(response => {
-      res.json(response.body)
+      console.log("in server: response is", response)
+      // res.json(response.body)
     })
     .catch(err => {
       console.log({err})
