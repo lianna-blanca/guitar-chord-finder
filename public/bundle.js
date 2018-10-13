@@ -170,6 +170,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var APIendpoint = "/v1/chords/";
 
 function getAPIChordFrets(chord) {
+  // do all the swapping of fret array to strings HERE
+
   return _superagent2.default.get(APIendpoint + chord);
 }
 
@@ -611,7 +613,7 @@ var Fretboard = function (_React$Component) {
     _this.getChordKey = _this.getChordKey.bind(_this);
     _this.getFretsForChord = _this.getFretsForChord.bind(_this);
     _this.translateEnharmonics = _this.translateEnharmonics.bind(_this);
-    _this.getKeyURLformat = _this.getKeyURLformat.bind(_this);
+    _this.getFormattedChordKey = _this.getFormattedChordKey.bind(_this);
     _this.translateFretArrayToStrings = _this.translateFretArrayToStrings.bind(_this);
     _this.clearLitNotes = _this.clearLitNotes.bind(_this);
     _this.displayChordNotes = _this.displayChordNotes.bind(_this);
@@ -721,11 +723,9 @@ var Fretboard = function (_React$Component) {
 
       // --- For fetching the fret positions to light up each chord.
       this.clearLitNotes();
-      var URLchordKey = this.getKeyURLformat();
+      var formattedChordKey = this.getFormattedChordKey();
 
-      // use two; try from database, if no response, use API AS IT WAS
-
-      (0, _chordAPI.getAPIChordFrets)(URLchordKey).then(function (res) {
+      (0, _chordAPI.getAPIChordFrets)(formattedChordKey).then(function (res) {
         // console.log(res.text)
         if (res.body.length > 0) {
           var fretData = (res.body[0].strings || "").split(" ");
@@ -734,8 +734,8 @@ var Fretboard = function (_React$Component) {
       });
     }
   }, {
-    key: "getKeyURLformat",
-    value: function getKeyURLformat() {
+    key: "getFormattedChordKey",
+    value: function getFormattedChordKey() {
       // ---- For formatting the API call correctly
       var chordKeyForAPI = this.translateEnharmonics(this.getChordKey());
       var chordQuality = this.props.selectedChord.selectedQuality;
@@ -759,6 +759,7 @@ var Fretboard = function (_React$Component) {
   }, {
     key: "translateFretArrayToStrings",
     value: function translateFretArrayToStrings(fretArray) {
+      // MOVE THIS TO BACK END
       // ---- For capturing the fret numbers to light up each chord
 
       var thickToThinArray = fretArray.reverse();

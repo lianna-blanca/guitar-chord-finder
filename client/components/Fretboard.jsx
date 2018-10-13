@@ -14,7 +14,7 @@ class Fretboard extends React.Component {
     this.getChordKey = this.getChordKey.bind(this)
     this.getFretsForChord = this.getFretsForChord.bind(this)
     this.translateEnharmonics = this.translateEnharmonics.bind(this)
-    this.getKeyURLformat = this.getKeyURLformat.bind(this)
+    this.getFormattedChordKey = this.getFormattedChordKey.bind(this)
     this.translateFretArrayToStrings = this.translateFretArrayToStrings.bind(this)
     this.clearLitNotes = this.clearLitNotes.bind(this)
     this.displayChordNotes = this.displayChordNotes.bind(this)
@@ -116,11 +116,9 @@ getChordKey() {
 getFretsForChord() {
 // --- For fetching the fret positions to light up each chord.
   this.clearLitNotes()
-  let URLchordKey = this.getKeyURLformat()
+  let formattedChordKey = this.getFormattedChordKey()
 
-// use two; try from database, if no response, use API AS IT WAS
-
-  getAPIChordFrets(URLchordKey)
+  getAPIChordFrets(formattedChordKey)
   .then(res => {
     // console.log(res.text)
     if (res.body.length > 0) {
@@ -130,7 +128,7 @@ getFretsForChord() {
   })
 }
 
-getKeyURLformat() {
+getFormattedChordKey() {
 // ---- For formatting the API call correctly
   let chordKeyForAPI = this.translateEnharmonics(this.getChordKey()) 
   let chordQuality = this.props.selectedChord.selectedQuality
@@ -154,6 +152,7 @@ translateEnharmonics(chordKey) {
 }
 
 translateFretArrayToStrings(fretArray) {
+// MOVE THIS TO BACK END
 // ---- For capturing the fret numbers to light up each chord
 
   let thickToThinArray = fretArray.reverse()

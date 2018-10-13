@@ -23,7 +23,7 @@ const data = {
   "B" : "[{\"strings\": \"X 2 4 4 4 2\"}]",
 }
 
-function getChord(chord) {
+function getChordFromAPI(chord) {
   let cachedChord = data[chord]
 
   if (true || !cachedChord) {
@@ -38,5 +38,5 @@ function getChord(chord) {
 }
 
 module.exports = {
-  getChord
+  getChordFromAPI
 }

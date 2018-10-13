@@ -2,7 +2,7 @@ const knex = require("knex")
 const config = require("../../knexfile")[process.env.NODE_ENV || 'development']
 const dbConnection = knex(config)
 
-function getChord(calledChord) {
+function getChordFromDB(calledChord) {
   return dbConnection("chord_table")
 
   .then(tableData => {
@@ -27,6 +27,6 @@ function getChord(calledChord) {
 
 
 module.exports = {
-  getChord
+  getChordFromDB
 }
 

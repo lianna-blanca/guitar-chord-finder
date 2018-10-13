@@ -16,7 +16,9 @@ const request = require('superagent')
 
 
 server.get('/v1/chords/:chord', (req, res) => {
-  api.getChord(req.params.chord)
+// use two; first from database, if no match, use API AS IT WAS
+
+  api.getChordFromAPI(req.params.chord)
   // request
   //   .get(`${endpoint}/${req.params.chord}`)
   .then(response => {
@@ -24,7 +26,7 @@ server.get('/v1/chords/:chord', (req, res) => {
   })
 
 
-  // db.getChord(req.params.chord)
+  // db.getChordFromDB(req.params.chord)
   //  .then(response => {
   //     if (response !== undefined) {
   //     console.log("in server: response is", response)
