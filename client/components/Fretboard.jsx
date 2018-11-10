@@ -114,56 +114,56 @@ getChordKey() {
 }
 
 getFretsForChord() {
-// --- For fetching the fret positions to light up each chord.
+console.log("--------- in get frets for chord")
+// --- For fetching the fret positions to light up each chord (currently from API)
   this.clearLitNotes()
   let formattedChordKey = this.getFormattedChordKey()
 
   getAPIChordFrets(formattedChordKey)
   .then(res => {
-    // console.log(res.text)
+    console.log(res.text)
     if (res.body.length > 0) {
-      let fretData = (res.body[0].strings || "").split(" ")
+      let fretData = (res.body[0].strings || "").split(" ") // this needs to change for database call
+      console.log("fretData", fretData)
       this.translateFretArrayToStrings(fretData)
     }
   })
 }
 
 getFormattedChordKey() {
-// ---- For formatting the API call correctly
+// ---- For formatting the API call correctly re: underscores, etc
   let chordKeyForAPI = this.translateEnharmonics(this.getChordKey()) 
-  let chordQuality = this.props.selectedChord.selectedQuality
 
-  if (chordQuality === "maj") {
-    let URLforAPI = chordKeyForAPI
-    return URLforAPI
-    }
-  else {
-    let URLforAPI = chordKeyForAPI + "_" + chordQuality
-    return URLforAPI
-  }
+  if (this.props.selectedChord.selectedQuality === "maj") return chordKeyForAPI
+  else return chordKeyForAPI + "_" + this.props.selectedChord.selectedQuality
 }
 
 translateEnharmonics(chordKey) {
-// ---- To convert keys with sharps to flats (e.g. C3 -> Db) as API does not deal in sharps
-  if (chordKey != undefined && chordKey.includes("#") || chordKey != undefined && chordKey.includes("Cb") || chordKey != undefined && chordKey.includes("Fb")) {
+// ---- To convert keys with sharps to flats (e.g. C# -> Db) as API does not deal in sharps
+  if (chordKey != undefined && chordKey.includes("#") 
+  || chordKey != undefined && chordKey.includes("Cb") 
+  || chordKey != undefined && chordKey.includes("Fb")) {
     return Note.enharmonic(chordKey)
   }
   else return chordKey
 }
 
 translateFretArrayToStrings(fretArray) {
-// MOVE THIS TO BACK END
-// ---- For capturing the fret numbers to light up each chord
+// ---- For changing the API/db array into fret IDs
+// move to backend?
 
-  let thickToThinArray = fretArray.reverse()
-  for (let i = 0; i < thickToThinArray.length; i++) {
-    const thisFret = thickToThinArray[i];
+// API returns thickest as first array entry and we need thinnest first
+  let thinToThickArray = fretArray.reverse() 
+  for (let i = 0; i < thinToThickArray.length; i++) {
+    let thisFret = thinToThickArray[i];
+// Ignore string if is "X" (not played)
     if (!isNaN(thisFret)) {
+// Translate to fret ID
       let thisID = "fret" + thisFret + "-string" + (i+1)
       this.lightUpNote(thisID)
     }
     else {
-      // Placeholder additional function for muted strings
+      // Placeholder additional function for lighting muted strings differently
     }
   }
 }
@@ -186,6 +186,7 @@ displayChordNotes() {
 }
 
 lightUpNote(incomingID) {
+
 // --- To add the "lit" CSS class to selected fret divs
   let selectedNote = document.getElementById(incomingID)
   selectedNote.classList.add("lit")
