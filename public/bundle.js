@@ -721,14 +721,16 @@ var Fretboard = function (_React$Component) {
     value: function getFretsForChord() {
       var _this3 = this;
 
-      // --- For fetching the fret positions to light up each chord.
+      console.log("--------- in get frets for chord");
+      // --- For fetching the fret positions to light up each chord (currently from API)
       this.clearLitNotes();
       var formattedChordKey = this.getFormattedChordKey();
 
       (0, _chordAPI.getAPIChordFrets)(formattedChordKey).then(function (res) {
-        // console.log(res.text)
+        console.log(res.text);
         if (res.body.length > 0) {
-          var fretData = (res.body[0].strings || "").split(" ");
+          var fretData = (res.body[0].strings || "").split(" "); // this needs to change for database call
+          console.log("fretData", fretData);
           _this3.translateFretArrayToStrings(fretData);
         }
       });
@@ -736,22 +738,15 @@ var Fretboard = function (_React$Component) {
   }, {
     key: "getFormattedChordKey",
     value: function getFormattedChordKey() {
-      // ---- For formatting the API call correctly
+      // ---- For formatting the API call correctly re: underscores, etc
       var chordKeyForAPI = this.translateEnharmonics(this.getChordKey());
-      var chordQuality = this.props.selectedChord.selectedQuality;
 
-      if (chordQuality === "maj") {
-        var URLforAPI = chordKeyForAPI;
-        return URLforAPI;
-      } else {
-        var _URLforAPI = chordKeyForAPI + "_" + chordQuality;
-        return _URLforAPI;
-      }
+      if (this.props.selectedChord.selectedQuality === "maj") return chordKeyForAPI;else return chordKeyForAPI + "_" + this.props.selectedChord.selectedQuality;
     }
   }, {
     key: "translateEnharmonics",
     value: function translateEnharmonics(chordKey) {
-      // ---- To convert keys with sharps to flats (e.g. C3 -> Db) as API does not deal in sharps
+      // ---- To convert keys with sharps to flats (e.g. C# -> Db) as API does not deal in sharps
       if (chordKey != undefined && chordKey.includes("#") || chordKey != undefined && chordKey.includes("Cb") || chordKey != undefined && chordKey.includes("Fb")) {
         return Note.enharmonic(chordKey);
       } else return chordKey;
@@ -759,17 +754,20 @@ var Fretboard = function (_React$Component) {
   }, {
     key: "translateFretArrayToStrings",
     value: function translateFretArrayToStrings(fretArray) {
-      // MOVE THIS TO BACK END
-      // ---- For capturing the fret numbers to light up each chord
+      // ---- For changing the API/db array into fret IDs
+      // move to backend?
 
-      var thickToThinArray = fretArray.reverse();
-      for (var i = 0; i < thickToThinArray.length; i++) {
-        var thisFret = thickToThinArray[i];
+      // API returns thickest as first array entry and we need thinnest first
+      var thinToThickArray = fretArray.reverse();
+      for (var i = 0; i < thinToThickArray.length; i++) {
+        var thisFret = thinToThickArray[i];
+        // Ignore string if is "X" (not played)
         if (!isNaN(thisFret)) {
+          // Translate to fret ID
           var thisID = "fret" + thisFret + "-string" + (i + 1);
           this.lightUpNote(thisID);
         } else {
-          // Placeholder additional function for muted strings
+          // Placeholder additional function for lighting muted strings differently
         }
       }
     }
@@ -795,6 +793,7 @@ var Fretboard = function (_React$Component) {
   }, {
     key: "lightUpNote",
     value: function lightUpNote(incomingID) {
+
       // --- To add the "lit" CSS class to selected fret divs
       var selectedNote = document.getElementById(incomingID);
       selectedNote.classList.add("lit");
