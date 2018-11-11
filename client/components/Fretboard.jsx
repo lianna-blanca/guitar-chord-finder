@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import * as Chord from "tonal-chord"
 import * as Note from "tonal-note"
 import {getAPIChordFrets} from "../chordAPI"
+import { request } from "http";
 
 class Fretboard extends React.Component {
   constructor(props){
@@ -122,11 +123,11 @@ console.log("--------- in get frets for chord")
   getAPIChordFrets(formattedChordKey)
   .then(res => {
     console.log(res.text)
-    if (res.body.length > 0) {
-      let fretData = (res.body[0].strings || "").split(" ") // this needs to change for database call
-      console.log("fretData", fretData)
-      this.translateFretArrayToStrings(fretData)
-    }
+  //   if (res.body.length > 0) {
+  //     let fretData = (res.body[0].strings || "").split(" ") // this needs to change for database call
+  //     console.log("fretData", fretData)
+  //     this.translateFretArrayToStrings(fretData)
+  //   }
   })
 }
 

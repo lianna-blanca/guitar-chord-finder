@@ -1,7 +1,7 @@
 const express = require("express")
 const path = require("path")
 const server = express()
-const api = require("./api")
+// const api = require("./api")
 const db = require("./db/dbFunctions")
 
 //Middleware
@@ -20,11 +20,10 @@ server.get('/v1/chords/:chord', (req, res) => {
 
   api.getChordFromAPI(req.params.chord)
   // request
-  //   .get(`${endpoint}/${req.params.chord}`)
+    // .get(`${endpoint}/${req.params.chord}`)
   .then(response => {
     res.json(response.body)
   })
-
 
   // db.getChordFromDB(req.params.chord)
   //  .then(response => {

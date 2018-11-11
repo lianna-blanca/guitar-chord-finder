@@ -11,7 +11,7 @@ router.get("/", (req,res) => {
 // ---------------------- For knex database
   dbFunctions.getThing()
   .then(dataFromDBFunction => {
-// console.log("------------ routes/routeName.js --------")
+console.log("------------ routes/routeName.js --------")
 // console.log(dataFromDBFunction)
     res.json(dataFromDBFunction)
   })
