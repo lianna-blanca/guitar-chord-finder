@@ -1,15 +1,22 @@
 const express = require("express")
 const router = express.Router()
 
-const dbFunctions = require("../db/dbFunctions")
+const dbFunctions = require("../db/chordDB")
 
 router.get("/", (req,res) => {
+  let chordCalled = "E_maj7" //req.param.chordName
 
-  dbFunctions.getChord()
-  .then(dataFromDBFunction => {
-// console.log("------------ routes/routeName.js --------")
-// console.log(dataFromDBFunction)
-    res.send(dataFromDBFunction)
+  dbFunctions.getChord(chordCalled)
+  .then(chords => {
+console.log("------------ routes/routeName.js --------")
+console.log(chords)
+    // for (let i = 0; i < chords.length; i++) {
+    //   console.log(chords[i].chordKey)
+      
+    // }
+
+
+    res.send(chords)
   })
 
 })
