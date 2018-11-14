@@ -2,7 +2,7 @@ import React from "react"
 import {connect} from 'react-redux'
 import * as Chord from "tonal-chord"
 import * as Note from "tonal-note"
-import {getAPIChordFrets} from "../chordAPI"
+// import {getAPIChordFrets} from "../chordAPI"
 
 class Fretboard extends React.Component {
   constructor(props){
@@ -123,13 +123,13 @@ getFretsForChord() {
 
   let URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality)
 
-  getAPIChordFrets(URLforAPI)
-  .then(res => {
-    if (res.body.length > 0) {
-      let fretData = (res.body[0].strings || "").split(" ")
-      this.translateFretArrayToStrings(fretData)
-    }
-  })
+  // getAPIChordFrets(URLforAPI)
+  // .then(res => {
+  //   if (res.body.length > 0) {
+  //     let fretData = (res.body[0].strings || "").split(" ")
+  //     this.translateFretArrayToStrings(fretData)
+  //   }
+  // })
 }
 
 translateEnharmonics(chordKey) {

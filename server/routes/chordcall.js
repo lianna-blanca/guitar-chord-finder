@@ -3,8 +3,6 @@ const router = express.Router()
 
 const dbFunctions = require("../db/chordDB")
 
-// router.get("/", (req,res) => {
-//   let chordCalled = "D_maj7"
 router.get("/:chord", (req,res) => {
   let chordCalled = req.params.chord
 
