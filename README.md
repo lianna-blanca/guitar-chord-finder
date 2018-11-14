@@ -16,3 +16,4 @@ Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, Se
 Connection to external API severed. Database built. Backend routes and functions connecting to database.
 
 To do: Front end connection to DB API. 
+
