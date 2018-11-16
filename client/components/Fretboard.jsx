@@ -2,7 +2,7 @@ import React from "react"
 import {connect} from 'react-redux'
 import * as Chord from "tonal-chord"
 import * as Note from "tonal-note"
-// import {getAPIChordFrets} from "../chordAPI"
+import {getAPIChordFrets} from "../chordAPI"
 
 class Fretboard extends React.Component {
   constructor(props){
@@ -122,19 +122,23 @@ getFretsForChord() {
   let chordQuality = this.props.selectedChord.selectedQuality || ""
 
   let URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality)
+  if (URLforAPI) console.log("URLforAPI", URLforAPI)
 
-  // getAPIChordFrets(URLforAPI)
-  // .then(res => {
-  //   if (res.body.length > 0) {
-  //     let fretData = (res.body[0].strings || "").split(" ")
-  //     this.translateFretArrayToStrings(fretData)
-  //   }
-  // })
+  getAPIChordFrets(URLforAPI)
+  .then(res => {
+    console.log("returned res.body", res.body)
+    // if (res.body.length > 0) {
+    //   let fretData = (res.body[0].strings || "").split(" ")
+    //   this.translateFretArrayToStrings(fretData)
+    // }
+  })
 }
 
 translateEnharmonics(chordKey) {
 // ---- To convert keys with sharps to flats so they work for API
-  if (chordKey != undefined && chordKey.includes("#") || chordKey != undefined && chordKey.includes("Cb") || chordKey != undefined && chordKey.includes("Fb")) {
+  if (chordKey != undefined && chordKey.includes("#") 
+  || chordKey != undefined && chordKey.includes("Cb") 
+  || chordKey != undefined && chordKey.includes("Fb")) {
     return Note.enharmonic(chordKey)
   }
   else return chordKey
@@ -142,8 +146,8 @@ translateEnharmonics(chordKey) {
 
 getURLforAPI(chordKeyForAPI, chordQuality) {
 // ---- For formatting the API call correctly
-  if (chordQuality === "maj" || chordQuality === "") {
-    let URLforAPI = chordKeyForAPI
+  if (chordQuality === "") {
+    let URLforAPI = chordKeyForAPI + "_maj"
     return URLforAPI
     }
   else {
