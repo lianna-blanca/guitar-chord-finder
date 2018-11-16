@@ -122,15 +122,14 @@ getFretsForChord() {
   let chordQuality = this.props.selectedChord.selectedQuality || ""
 
   let URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality)
-  if (URLforAPI) console.log("URLforAPI", URLforAPI)
-
+  
   getAPIChordFrets(URLforAPI)
   .then(res => {
-    console.log("returned res.body", res.body)
-    // if (res.body.length > 0) {
-    //   let fretData = (res.body[0].strings || "").split(" ")
-    //   this.translateFretArrayToStrings(fretData)
-    // }
+    console.log(res.body)
+    if (res.body.length > 0) {
+      let fretData = (res.body[0].chordFretPositions || "").split(" ")
+      this.translateFretArrayToStrings(fretData)
+    }
   })
 }
 

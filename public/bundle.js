@@ -717,6 +717,8 @@ var Fretboard = function (_React$Component) {
   }, {
     key: "getFretsForChord",
     value: function getFretsForChord() {
+      var _this3 = this;
+
       // --- For fetching the fret positions to light up each chord.
       this.clearLitNotes();
 
@@ -725,14 +727,13 @@ var Fretboard = function (_React$Component) {
       var chordQuality = this.props.selectedChord.selectedQuality || "";
 
       var URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality);
-      if (URLforAPI) console.log("URLforAPI", URLforAPI);
 
       (0, _chordAPI.getAPIChordFrets)(URLforAPI).then(function (res) {
-        console.log("returned res.body", res.body);
-        // if (res.body.length > 0) {
-        //   let fretData = (res.body[0].strings || "").split(" ")
-        //   this.translateFretArrayToStrings(fretData)
-        // }
+        console.log(res.body);
+        if (res.body.length > 0) {
+          var fretData = (res.body[0].chordFretPositions || "").split(" ");
+          _this3.translateFretArrayToStrings(fretData);
+        }
       });
     }
   }, {
