@@ -1,3 +1,8 @@
+--------------------- Plans for this branch:
+
+* Analyse cause of lit notes not showing text, or showing wrong text. 
+
+
 --------------------- Current problems:
 
 :: fret 13 off board
