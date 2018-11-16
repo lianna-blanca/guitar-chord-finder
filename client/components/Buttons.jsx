@@ -99,10 +99,10 @@ render() {
         <button className="quality" type="button" value="maj7">M7 / maj7</button>
         <button className="quality" type="button" value="m7">m7 / min7</button>
         <button className="quality" type="button" value="dim">dim</button>
-        <button className="quality" type="button" value="dim7">dim7</button>
+        {/* <button className="quality" type="button" value="dim7">dim7</button> */}
         <button className="quality" type="button" value="aug">aug</button>
-        <button className="quality" type="button" value="sus2">sus2</button>
-        <button className="quality" type="button" value="sus4">sus4</button>
+        {/* <button className="quality" type="button" value="sus2">sus2</button> */}
+        {/* <button className="quality" type="button" value="sus4">sus4</button> */}
         {/* <button className="quality" type="button" value="6">6</button>
         <button className="quality" type="button" value="11">11</button>
         <button className="quality" type="button" value="m11">m11</button> */}

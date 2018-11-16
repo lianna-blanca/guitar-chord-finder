@@ -516,23 +516,8 @@ var Buttons = function (_React$Component) {
               ),
               _react2.default.createElement(
                 "button",
-                { className: "quality", type: "button", value: "dim7" },
-                "dim7"
-              ),
-              _react2.default.createElement(
-                "button",
                 { className: "quality", type: "button", value: "aug" },
                 "aug"
-              ),
-              _react2.default.createElement(
-                "button",
-                { className: "quality", type: "button", value: "sus2" },
-                "sus2"
-              ),
-              _react2.default.createElement(
-                "button",
-                { className: "quality", type: "button", value: "sus4" },
-                "sus4"
               )
             )
           )
@@ -729,7 +714,6 @@ var Fretboard = function (_React$Component) {
       var URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality);
 
       (0, _chordAPI.getAPIChordFrets)(URLforAPI).then(function (res) {
-        console.log(res.body);
         if (res.body.length > 0) {
           var fretData = (res.body[0].chordFretPositions || "").split(" ");
           _this3.translateFretArrayToStrings(fretData);

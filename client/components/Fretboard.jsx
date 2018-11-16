@@ -125,7 +125,6 @@ getFretsForChord() {
   
   getAPIChordFrets(URLforAPI)
   .then(res => {
-    console.log(res.body)
     if (res.body.length > 0) {
       let fretData = (res.body[0].chordFretPositions || "").split(" ")
       this.translateFretArrayToStrings(fretData)
