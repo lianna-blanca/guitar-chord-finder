@@ -748,12 +748,10 @@ var Fretboard = function (_React$Component) {
     value: function getURLforAPI(chordKeyForAPI, chordQuality) {
       // ---- For formatting the API call correctly
       if (chordQuality === "") {
-        var URLforAPI = chordKeyForAPI + "_maj";
-        return URLforAPI;
-      } else {
-        var _URLforAPI = chordKeyForAPI + "_" + chordQuality;
-        return _URLforAPI;
+        var _chordQuality = "_maj";
       }
+      var URLforAPI = chordKeyForAPI + "_" + chordQuality;
+      return URLforAPI;
     }
   }, {
     key: "translateFretArrayToStrings",

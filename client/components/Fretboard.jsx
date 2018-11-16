@@ -146,14 +146,9 @@ translateEnharmonics(chordKey) {
 
 getURLforAPI(chordKeyForAPI, chordQuality) {
 // ---- For formatting the API call correctly
-  if (chordQuality === "") {
-    let URLforAPI = chordKeyForAPI + "_maj"
-    return URLforAPI
-    }
-  else {
+  if (chordQuality === "") {let chordQuality = "_maj"}
     let URLforAPI = chordKeyForAPI + "_" + chordQuality
     return URLforAPI
-  }
 }
 
 translateFretArrayToStrings(fretArray) {
