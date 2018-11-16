@@ -1,5 +1,8 @@
 --------------------- Current problems:
 
+:: fret 13 off board
+G#dim/Abdim does not work, only lights up notes before first fret13 note
+
 
 :: Notes in chord list sometimes flats/sharps when display shows other version (written notes: all views)
 
@@ -23,4 +26,3 @@
 :: Sharps stay on fretboard when unlit (written notes: whole only)
 * Dmaj -> Dmin
 * B -> C
-

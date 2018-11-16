@@ -6,6 +6,6 @@ server.use(express.json())
 server.use(express.static(path.join(__dirname, "..", "public"))) 
 
 const chordRoute = require("./routes/chordcall");
-server.use("/api/v1/route", chordRoute)
+server.use("/api/v1/chord", chordRoute)
 
 module.exports = server
