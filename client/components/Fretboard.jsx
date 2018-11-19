@@ -28,17 +28,27 @@ componentDidMount() {
   for (let i = 0; i < frets.length; i++) {
     frets[i].addEventListener("click", (x) => {
       this.lightUpNote(x.target.id)
-      // need to trigger writing of inner HTML if in clear mode
+      // need to trigger writing of inner HTML
     })
     frets[i].addEventListener("dblclick", (x) => {
       this.unLightNote(x.target.id)
-      // need to trigger clearing of inner HTML if in clear mode
+      // need to trigger clearing of inner HTML
     })
   }
 
 }
 
 fretDisplay() {
+/*
+Legacy code from when sharp/flat buttons made all sharps/flats appear; need to untangle it.
+
+This is using the tone selected to determine what text should be lit up. 
+Need instead to have it take the ID and apply either sharp or flat
+
+what if instead of taking it from tone it takes the sharp/flat/not from the chord selected?
+
+ */
+
 // ---- For changing the innerHTML of all frets depending on the display selected
   let sharpsAndFlats = document.getElementsByClassName("sharp-or-flat")
   for (let i = 0; i < sharpsAndFlats.length; i++) {
@@ -133,10 +143,11 @@ getFretsForChord() {
 }
 
 translateEnharmonics(chordKey) {
-// ---- To convert keys with sharps to flats so they work for API
+// ---- To convert keys with sharps to flats so they work for API/db
   if (chordKey != undefined && chordKey.includes("#") 
   || chordKey != undefined && chordKey.includes("Cb") 
-  || chordKey != undefined && chordKey.includes("Fb")) {
+  || chordKey != undefined && chordKey.includes("Fb")) 
+  {
     return Note.enharmonic(chordKey)
   }
   else return chordKey

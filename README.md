@@ -42,8 +42,6 @@ Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, Se
 * Not all lit frets get text when chord is selected, e.g.:
   * C#, D#, F#, Bb, Db, Fb
 
-* G#dim/Abdim does not work as fret 13 is off the board
-
 * Fretboard click lights up fret space but does not add text
   * Exceptions: when chord (e.g. Baug) is already selected. Does not apply to all chords, pattern to be investigated
 
