@@ -17,6 +17,8 @@ Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, Se
 
 ## Latest updates:
 
+* Fret 13 added
+
 * Frontend JavaScript connecting to (internal) API, frets lighting up as they were with external API
 
 * Backend routes and functions connecting to database
@@ -34,8 +36,6 @@ Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, Se
   * How many IDs are being used? 
 
   * Will the note letters be useful in the future? Probably, if features such as "light up all C# notes" are implemented.
-
-* Add fret 13(+ more?); at present G#dim/Abdim does not work
 
 ## Known problems
 

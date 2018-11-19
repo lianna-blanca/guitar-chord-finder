@@ -1007,11 +1007,7 @@ var Fretboard = function (_React$Component) {
             { className: "fret string3 fret12", string: "3", fret: "12", note: "G", scinote: "G4", id: "fret12-string3" },
             "G"
           ),
-          _react2.default.createElement(
-            "div",
-            { className: "fret string3 fret13 sharp-or-flat", string: "3", fret: "13", note: "Gsharp-Aflat", scinote: "G4sharp A4flat", id: "fret13-string3" },
-            "G"
-          )
+          _react2.default.createElement("div", { className: "fret string3 fret13 sharp-or-flat", string: "3", fret: "13", note: "Gsharp-Aflat", scinote: "G4sharp A4flat", id: "fret13-string3" })
         ),
         _react2.default.createElement(
           "div",
@@ -1061,11 +1057,7 @@ var Fretboard = function (_React$Component) {
             { className: "fret string4 fret12", string: "4", fret: "12", note: "D", scinote: "D4", id: "fret12-string4" },
             "D"
           ),
-          _react2.default.createElement(
-            "div",
-            { className: "fret string4 fret13  sharp-or-flat", string: "4", fret: "13", note: "Dsharp-Eflat", scinote: "D4sharp E4flat", id: "fret13-string4" },
-            "D"
-          )
+          _react2.default.createElement("div", { className: "fret string4 fret13  sharp-or-flat", string: "4", fret: "13", note: "Dsharp-Eflat", scinote: "D4sharp E4flat", id: "fret13-string4" })
         ),
         _react2.default.createElement(
           "div",
@@ -1115,11 +1107,7 @@ var Fretboard = function (_React$Component) {
             { className: "fret string5 fret12", string: "5", fret: "12", note: "A", scinote: "A3", id: "fret12-string5" },
             "A"
           ),
-          _react2.default.createElement(
-            "div",
-            { className: "fret string5 fret13  sharp-or-flat", string: "5", fret: "13", note: "Asharp-Bflat", scinote: "A3sharp B3flat", id: "fret13-string5" },
-            "A"
-          )
+          _react2.default.createElement("div", { className: "fret string5 fret13  sharp-or-flat", string: "5", fret: "13", note: "Asharp-Bflat", scinote: "A3sharp B3flat", id: "fret13-string5" })
         ),
         _react2.default.createElement(
           "div",
@@ -1172,7 +1160,7 @@ var Fretboard = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { className: "fret string6 fret13", string: "6", fret: "13", note: "F", scinote: "F3", id: "fret13-string6" },
-            "E"
+            "F"
           )
         ),
         _react2.default.createElement(

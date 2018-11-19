@@ -131,6 +131,11 @@ height: 19px;
   width: 105px;
   } 
 
+.fret13 {
+  border-right: 6px rgb(85, 85, 85) solid;
+  width: 105px;
+  } 
+
 
 /* ------------- Special Strings and Frets ------------- */
 
@@ -213,6 +218,11 @@ height: 19px;
   padding-bottom: 10px;
  } 
 
+.fret013 {
+  width: 105px;
+  font-size: 0.8em;
+  padding-bottom: 10px;
+ } 
 
 .lit {
   background-color: #80dfff;
