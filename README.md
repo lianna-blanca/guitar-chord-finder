@@ -11,9 +11,44 @@ A visual guide to playing guitar.
 Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, September 2018, created by @lianna-blanca, @zanelkt and @WinstonItiDev.
 
 
-# Current status
+# Project Progress
 
-Connection to external API severed. Database built. Backend routes and functions connecting to database.
+## Latest updates:
 
-To do: Front end connection to DB API. 
+* Frontend JavaScript connecting to (internal) API, frets lighting up as they were with external API
+
+* Backend routes and functions connecting to database
+
+* Database built
+
+* Connection to external API severed
+
+## To Do: 
+
+* Analyse cause of lit notes not displaying fret text.
+
+* Look into generating the frets rather than hardcoding each div 
+
+How many IDs are being used? 
+
+Will the note letters be useful in the future? Probably, if features such as "light up all C# notes" are implemented.
+
+* Add fret 13(+ more?); at present G#dim/Abdim does not work
+
+## Known problems
+
+* Not all lit frets get text when chord is selected, e.g.:
+** C#, D#, F#, Bb, Db, Fb
+
+* G#dim/Abdim does not work as fret 13 is off the board
+
+* Fretboard click lights up fret space but does not add text
+** Exceptions: when chord (e.g. Baug) is already selected. Does not apply to all chords, pattern to be investigated
+
+* If tone is clicked without a chord, it defaults to C, which is fine but unclear.
+
+* Fret text does not show double sharps or flats, e.g.:
+** Baug: F## text is G
+** Cbm7: Bbb text is A, Ebb text is D, Cb text is B
+
 
