@@ -231,6 +231,7 @@ this.displayChordNotes()
         <div className="fret string0 fret010"></div>
         <div className="fret string0 fret011"></div>
         <div className="fret string0 fret012">12th Fret</div>
+        <div className="fret string0 fret013"></div>
       </div>
 
       <div className="string" id="first-string">
@@ -247,6 +248,7 @@ this.displayChordNotes()
         <div className="fret string1 fret10" string="1" fret="10" note="D" scinote="D5" id="fret10-string1">D</div>
         <div className="fret string1 fret11 sharp-or-flat" string="1" fret="11" note="Dsharp-Eflat" scinote="D5sharp E5flat" id="fret11-string1"></div>
         <div className="fret string1 fret12" string="1" fret="12" note="E" scinote="E5" id="fret12-string1">E</div>
+        <div className="fret string1 fret13" string="1" fret="13" note="F" scinote="F5" id="fret13-string1">F</div>
       </div>
 
       <div className="string" id="second-string">
@@ -263,6 +265,7 @@ this.displayChordNotes()
         <div className="fret string2 fret10" string="2" fret="10" note="A" scinote="A4" id="fret10-string2">A</div>
         <div className="fret string2 fret11 sharp-or-flat" string="2" fret="11" note="Asharp-Bflat" scinote="A4sharp B4flat" id="fret11-string2"></div>
         <div className="fret string2 fret12" string="2" fret="12" note="B" scinote="B4" id="fret12-string2">B</div>
+        <div className="fret string2 fret13" string="2" fret="13" note="C" scinote="C5" id="fret13-string2">C</div>
       </div>
 
       <div className="string" id="third-string">
@@ -279,6 +282,7 @@ this.displayChordNotes()
         <div className="fret string3 fret10" string="3" fret="10" note="F" scinote="F4" id="fret10-string3">F</div>
         <div className="fret string3 fret11 sharp-or-flat" string="3" fret="11" note="Fsharp-Gflat" scinote="F4sharp G4flat" id="fret11-string3"></div>
         <div className="fret string3 fret12" string="3" fret="12" note="G" scinote="G4" id="fret12-string3">G</div>
+        <div className="fret string3 fret13 sharp-or-flat" string="3" fret="13" note="Gsharp-Aflat" scinote="G4sharp A4flat" id="fret13-string3">G</div>
       </div>
 
       <div className="string" id="fourth-string">
@@ -295,6 +299,7 @@ this.displayChordNotes()
         <div className="fret string4 fret10" string="4" fret="10" note="C" scinote="C4" id="fret10-string4">C</div>
         <div className="fret string4 fret11 sharp-or-flat" string="4" fret="11" note="Csharp-Dflat" scinote="C4sharp D4flat" id="fret11-string4"></div>
         <div className="fret string4 fret12" string="4" fret="12" note="D" scinote="D4" id="fret12-string4">D</div>
+        <div className="fret string4 fret13  sharp-or-flat" string="4" fret="13" note="Dsharp-Eflat" scinote="D4sharp E4flat" id="fret13-string4">D</div>
       </div>
 
       <div className="string" id="fifth-string">
@@ -311,6 +316,7 @@ this.displayChordNotes()
         <div className="fret string5 fret10" string="5" fret="10" note="G" scinote="G3" id="fret10-string5">G</div>
         <div className="fret string5 fret11 sharp-or-flat" string="5" fret="11" note="Gsharp-Aflat" scinote="G3sharp A3flat" id="fret11-string5"></div>
         <div className="fret string5 fret12" string="5" fret="12" note="A" scinote="A3" id="fret12-string5">A</div>
+        <div className="fret string5 fret13  sharp-or-flat" string="5" fret="13" note="Asharp-Bflat" scinote="A3sharp B3flat" id="fret13-string5">A</div>
       </div>
 
       <div className="string" id="sixth-string">
@@ -327,6 +333,7 @@ this.displayChordNotes()
         <div className="fret string6 fret10" string="6" fret="10" note="D" scinote="D3" id="fret10-string6">D</div>
         <div className="fret string6 fret11 sharp-or-flat" string="6" fret="11" note="Dsharp-Eflat" scinote="D3sharp E3flat" id="fret11-string6"></div>
         <div className="fret string6 fret12" string="6" fret="12" note="E" scinote="E3" id="fret12-string6">E</div>
+        <div className="fret string6 fret13" string="6" fret="13" note="F" scinote="F3" id="fret13-string6">E</div>
       </div>
 
       <div className="string" id="seventh-string">
@@ -343,6 +350,7 @@ this.displayChordNotes()
         <div className="fret string7 fret10"></div>
         <div className="fret string7 fret11"></div>
         <div className="fret string7 fret12"></div>
+        <div className="fret string7 fret13"></div>
       </div>
 
     </div>
