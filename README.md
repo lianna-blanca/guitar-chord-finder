@@ -2,13 +2,15 @@
 
 A visual guide to playing guitar. 
 
+
 ## Reference
 
 * Tonal module docs: https://www.npmjs.com/package/tonal
 
 
 # Origins
-Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, September 2018, created by @lianna-blanca, @zanelkt and @WinstonItiDev.
+
+Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, September 2018, created by @lianna-blanca, @zanelkt and @WinstonItiDev. This version is improved and expanded (and currently in progress) by @lianna-blanca.
 
 
 # Project Progress
