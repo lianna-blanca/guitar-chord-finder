@@ -29,6 +29,8 @@ Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, Se
 
 ## To Do: 
 
+* Adjust CSS to handle screens wider than 2030px (fretboard is fine, but chord selection buttons spread too far, and all must be centered)
+
 * Analyse cause of lit notes not displaying fret text.
 
 * Look into generating the frets rather than hardcoding each div 
