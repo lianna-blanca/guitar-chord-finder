@@ -239,29 +239,47 @@ height: 19px;
   font-size: 1.1em;
 }
 
-.chord-buttons-row {
+.chord-selection {
   background-color: #D8CABC;
-  display: flex;
+  display: block;
   width: 80%;
   margin: auto;
+  padding-left: 5px;
 }
+
+.chord-buttons-row {
+  display: flex;
+  min-width: 80%;
+  margin: auto;
+}
+
+
 
 .key-row,
 .tone-row,
 .quality-row {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: center;
   margin: 8px;
 }
 
-.key-row,
-.quality-row {
-  width: 100%;
+@media only screen and (max-width: 750px) {
+  .chord-selection {
+    min-width: 100%;
+  }
+
+  .key-row,
+  .tone-row,
+  .quality-row {
+    flex-flow: row wrap;
+  }
 }
 
-.tone-row {
-  width: 50%;
+.key-row,
+.tone-row,
+.quality-row {
+  width: 100%;
 }
 
 .key,

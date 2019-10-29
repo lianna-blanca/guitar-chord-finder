@@ -60,19 +60,19 @@ render() {
     </div>
 
     <div id="note-display">
-      <p><strong>Notes:</strong> <span id="note-display-text"></span></p>
+      <p><strong>Chord Notes:</strong> <span id="note-display-text"></span></p>
     </div>
   </div>
 
   <div className="display-selection">
-  <h4>Fretboard notes:</h4>
+  <h4>Display sharps or flats:</h4>
         <button className="fretboard-tone" type="button" value="sharps">#</button>
         <button className="fretboard-tone" type="button" value="flats">b</button>
         <button className="fretboard-tone" type="button" value="clear">clear</button>
   </div>
 
   <div className="chord-selection">
-  <h4>Select chord:</h4>
+  <h2>Select chord:</h2>
     <div className="chord-buttons-row">
       <div className="key-row">
         <button className="key" type="button" value="C">C</button>
@@ -83,7 +83,9 @@ render() {
         <button className="key" type="button" value="A">A</button>
         <button className="key" type="button" value="B">B</button>
       </div>
+    </div>
 
+    <div className="chord-buttons-row">
       <div className="tone-row">
         <button className="tone" type="button" value="#">#</button>
         <button className="tone" type="button" value="b">b</button>
@@ -93,11 +95,11 @@ render() {
 
     <div className="chord-buttons-row">
       <div className="quality-row">
-        <button className="quality" type="button" value="maj">M / maj</button>
-        <button className="quality" type="button" value="m">m / min</button>
+        <button className="quality" type="button" value="maj">maj</button>
+        <button className="quality" type="button" value="m">min</button>
         <button className="quality" type="button" value="7">7</button>
-        <button className="quality" type="button" value="maj7">M7 / maj7</button>
-        <button className="quality" type="button" value="m7">m7 / min7</button>
+        <button className="quality" type="button" value="maj7">maj7</button>
+        <button className="quality" type="button" value="m7">min7</button>
         <button className="quality" type="button" value="dim">dim</button>
         {/* <button className="quality" type="button" value="dim7">dim7</button> */}
         <button className="quality" type="button" value="aug">aug</button>

@@ -377,7 +377,7 @@ var Buttons = function (_React$Component) {
               _react2.default.createElement(
                 "strong",
                 null,
-                "Notes:"
+                "Chord Notes:"
               ),
               " ",
               _react2.default.createElement("span", { id: "note-display-text" })
@@ -390,7 +390,7 @@ var Buttons = function (_React$Component) {
           _react2.default.createElement(
             "h4",
             null,
-            "Fretboard notes:"
+            "Display sharps or flats:"
           ),
           _react2.default.createElement(
             "button",
@@ -412,7 +412,7 @@ var Buttons = function (_React$Component) {
           "div",
           { className: "chord-selection" },
           _react2.default.createElement(
-            "h4",
+            "h2",
             null,
             "Select chord:"
           ),
@@ -457,7 +457,11 @@ var Buttons = function (_React$Component) {
                 { className: "key", type: "button", value: "B" },
                 "B"
               )
-            ),
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "chord-buttons-row" },
             _react2.default.createElement(
               "div",
               { className: "tone-row" },
@@ -487,12 +491,12 @@ var Buttons = function (_React$Component) {
               _react2.default.createElement(
                 "button",
                 { className: "quality", type: "button", value: "maj" },
-                "M / maj"
+                "maj"
               ),
               _react2.default.createElement(
                 "button",
                 { className: "quality", type: "button", value: "m" },
-                "m / min"
+                "min"
               ),
               _react2.default.createElement(
                 "button",
@@ -502,12 +506,12 @@ var Buttons = function (_React$Component) {
               _react2.default.createElement(
                 "button",
                 { className: "quality", type: "button", value: "maj7" },
-                "M7 / maj7"
+                "maj7"
               ),
               _react2.default.createElement(
                 "button",
                 { className: "quality", type: "button", value: "m7" },
-                "m7 / min7"
+                "min7"
               ),
               _react2.default.createElement(
                 "button",
