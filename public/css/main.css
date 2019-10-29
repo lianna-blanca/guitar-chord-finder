@@ -140,7 +140,7 @@ height: 19px;
 /* ------------- Special Strings and Frets ------------- */
 
 
-/* .zero-string {
+/* .fake-zero-string {
 } */
 
 .string0 {
@@ -264,18 +264,6 @@ height: 19px;
   margin: 8px;
 }
 
-@media only screen and (max-width: 750px) {
-  .chord-selection {
-    min-width: 100%;
-  }
-
-  .key-row,
-  .tone-row,
-  .quality-row {
-    flex-flow: row wrap;
-  }
-}
-
 .key-row,
 .tone-row,
 .quality-row {
@@ -290,6 +278,18 @@ height: 19px;
 
 .tone {
   max-height: 25px;
+}
+
+@media only screen and (max-width: 750px) {
+  .chord-selection {
+    min-width: 100%;
+  }
+
+  .key-row,
+  .tone-row,
+  .quality-row {
+    flex-flow: row wrap;
+  }
 }
 
 /* ---------------------- Song display ----------------------  */
