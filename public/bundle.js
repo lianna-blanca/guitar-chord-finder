@@ -362,7 +362,6 @@ var Buttons = function (_React$Component) {
                 null,
                 "Selected Chord:"
               ),
-              " ",
               this.props.selectedChord.selectedKey,
               this.props.selectedChord.selectedTone,
               this.props.selectedChord.selectedQuality
@@ -631,12 +630,12 @@ var Fretboard = function (_React$Component) {
     key: "fretDisplay",
     value: function fretDisplay() {
       /*
-      Legacy code from when sharp/flat buttons made all sharps/flats appear; need to untangle it.
+      Legacy code from when sharp/flat display buttons made all sharps/flats appear; need to untangle it.
       
-      This is using the tone selected to determine what text should be lit up. 
+      This uses the tone selected to determine what text should be lit up. 
       Need instead to have it take the ID and apply either sharp or flat
       
-      what if instead of taking it from tone it takes the sharp/flat/not from the chord selected?
+      what if instead of taking it from tone it takes the sharp/flat/neither from the chord selected?
       
        */
 
@@ -722,7 +721,7 @@ var Fretboard = function (_React$Component) {
       this.clearLitNotes();
 
       var chordKey = this.getChordKey();
-      var chordKeyForAPI = this.translateEnharmonics(chordKey); // e.g. C3 -> Db as API does not deal in sharps
+      var chordKeyForAPI = this.translateEnharmonics(chordKey); // e.g. C# -> Db as API does not deal in sharps
       var chordQuality = this.props.selectedChord.selectedQuality || "";
 
       var URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality);
@@ -746,9 +745,6 @@ var Fretboard = function (_React$Component) {
     key: "getURLforAPI",
     value: function getURLforAPI(chordKeyForAPI, chordQuality) {
       // ---- For formatting the API call correctly
-      if (chordQuality === "") {
-        var _chordQuality = "_maj";
-      }
       var URLforAPI = chordKeyForAPI + "_" + chordQuality;
       return URLforAPI;
     }
@@ -785,6 +781,7 @@ var Fretboard = function (_React$Component) {
   }, {
     key: "displayChordNotes",
     value: function displayChordNotes() {
+      // --- Adds note text to "Chord Notes:"
       var chordNotes = Chord.notes(this.getChordKey(), this.props.selectedChord.selectedQuality);
       if (chordNotes.length > 0) {
         document.getElementById("note-display-text").innerHTML = chordNotes.join(" ");
@@ -797,7 +794,7 @@ var Fretboard = function (_React$Component) {
       var selectedNote = document.getElementById(incomingID);
       selectedNote.classList.add("lit");
 
-      // untested
+      // untested!!
       if (selectedNote.classList.contains("sharp-or-flat")) {
         if (this.props.selectedChord.selectedTone == undefined || this.props.selectedChord.selectedTone === "") {
           var chordNotes = Chord.notes(this.getChordKey());
@@ -829,7 +826,7 @@ var Fretboard = function (_React$Component) {
         { className: "fretboard" },
         _react2.default.createElement(
           "div",
-          { className: "string", id: "zero-string" },
+          { className: "string", id: "fake-zero-string" },
           _react2.default.createElement("div", { className: "fret string0 fret00" }),
           _react2.default.createElement("div", { className: "fret string0 fret01" }),
           _react2.default.createElement("div", { className: "fret string0 fret02" }),
@@ -1179,7 +1176,7 @@ var Fretboard = function (_React$Component) {
         ),
         _react2.default.createElement(
           "div",
-          { className: "string", id: "seventh-string" },
+          { className: "string", id: "fake-seventh-string" },
           _react2.default.createElement("div", { className: "fret string7 fret0" }),
           _react2.default.createElement("div", { className: "fret string7 fret1" }),
           _react2.default.createElement("div", { className: "fret string7 fret2" }),
