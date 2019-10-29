@@ -226,9 +226,9 @@ this.getFretsForChord()
 this.displayChordNotes()
 
   return (
-    <div className="fretboard">
+  <div className="fretboard">
 
-    <div className="string" id="zero-string">
+    <div className="string" id="fake-zero-string">
         <div className="fret string0 fret00"></div>
         <div className="fret string0 fret01"></div>
         <div className="fret string0 fret02"></div>
@@ -347,7 +347,7 @@ this.displayChordNotes()
         <div className="fret string6 fret13" string="6" fret="13" note="F" scinote="F3" id="fret13-string6">F</div>
       </div>
 
-      <div className="string" id="seventh-string">
+      <div className="string" id="fake-seventh-string">
         <div className="fret string7 fret0"></div>
         <div className="fret string7 fret1"></div>
         <div className="fret string7 fret2"></div>
@@ -364,8 +364,7 @@ this.displayChordNotes()
         <div className="fret string7 fret13"></div>
       </div>
 
-    </div>
-    
+  </div>
   )
 }
 }
