@@ -40,12 +40,12 @@ componentDidMount() {
 
 fretDisplay() {
 /*
-Legacy code from when sharp/flat buttons made all sharps/flats appear; need to untangle it.
+Legacy code from when sharp/flat display buttons made all sharps/flats appear; need to untangle it.
 
-This is using the tone selected to determine what text should be lit up. 
+This uses the tone selected to determine what text should be lit up. 
 Need instead to have it take the ID and apply either sharp or flat
 
-what if instead of taking it from tone it takes the sharp/flat/not from the chord selected?
+what if instead of taking it from tone it takes the sharp/flat/neither from the chord selected?
 
  */
 
@@ -128,7 +128,7 @@ getFretsForChord() {
   this.clearLitNotes()
 
   let chordKey = this.getChordKey()
-  let chordKeyForAPI = this.translateEnharmonics(chordKey) // e.g. C3 -> Db as API does not deal in sharps
+  let chordKeyForAPI = this.translateEnharmonics(chordKey) // e.g. C# -> Db as API does not deal in sharps
   let chordQuality = this.props.selectedChord.selectedQuality || ""
 
   let URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality)
@@ -155,7 +155,6 @@ translateEnharmonics(chordKey) {
 
 getURLforAPI(chordKeyForAPI, chordQuality) {
 // ---- For formatting the API call correctly
-  if (chordQuality === "") {let chordQuality = "_maj"}
     let URLforAPI = chordKeyForAPI + "_" + chordQuality
     return URLforAPI
 }
@@ -188,6 +187,7 @@ clearLitNotes() {
 
 // -----------------------------------------------------------
 displayChordNotes() {
+// --- Adds note text to "Chord Notes:"
   let chordNotes = Chord.notes(this.getChordKey(), this.props.selectedChord.selectedQuality)
   if (chordNotes.length > 0) {
     document.getElementById("note-display-text").innerHTML = chordNotes.join(" ")
@@ -199,7 +199,7 @@ lightUpNote(incomingID) {
   let selectedNote = document.getElementById(incomingID)
   selectedNote.classList.add("lit")
 
-// untested
+// untested!!
   if (selectedNote.classList.contains("sharp-or-flat")) {
     if (this.props.selectedChord.selectedTone == undefined || this.props.selectedChord.selectedTone === "") {
       let chordNotes = Chord.notes(this.getChordKey())
