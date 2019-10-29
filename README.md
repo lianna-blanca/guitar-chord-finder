@@ -57,4 +57,5 @@ Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, Se
   * Baug: F## text is G
   * Cbm7: Bbb text is A, Ebb text is D, Cb text is B
 
+* Test suite is not running; seems to be due to a Jest update. 
 

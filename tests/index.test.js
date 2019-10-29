@@ -39,13 +39,15 @@ test("Fretboard has class of fretboard", () => {
 
 test("Fretboard has IDs for each string", () => {
   const wrapper = shallow(<Fretboard />)
+  expect(wrapper.text("string0"))
   expect(wrapper.text("string1"))
   expect(wrapper.text("string2"))
   expect(wrapper.text("string3"))
   expect(wrapper.text("string4"))
   expect(wrapper.text("string5"))
   expect(wrapper.text("string6"))
-})
+  expect(wrapper.text("string7"))
+  })
 
 // test("lightUpNote adds class lit to selected notes", () => {
 //   const wrapper = shallow(<Fretboard />)
