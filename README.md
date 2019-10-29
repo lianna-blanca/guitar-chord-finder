@@ -17,6 +17,8 @@ Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, Se
 
 ## Latest updates:
 
+* Adjusted CSS to keep chord selection buttons together
+
 * Fret 13 added
 
 * Frontend JavaScript connecting to (internal) API, frets lighting up as they were with external API
@@ -29,13 +31,13 @@ Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, Se
 
 ## To Do: 
 
-* Adjust CSS to handle screens wider than 2030px (fretboard is fine, but chord selection buttons spread too far, and all must be centered)
+* Clear lit chord button
 
 * Analyse cause of lit notes not displaying fret text.
 
-* Look into generating the frets rather than hardcoding each div 
+* Look into auto-generating the frets rather than hardcoding each div 
 
-  * How many IDs are being used? 
+  * How many IDs are being used? scinotes could be skipped
 
   * Will the note letters be useful in the future? Probably, if features such as "light up all C# notes" are implemented.
 
@@ -43,11 +45,13 @@ Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, Se
 
 * Not all lit frets get text when chord is selected, e.g.:
   * C#, D#, F#, Bb, Db, Fb
+  * (is this a problem?)
 
 * Fretboard click lights up fret space but does not add text
   * Exceptions: when chord (e.g. Baug) is already selected. Does not apply to all chords, pattern to be investigated
 
-* If tone is clicked without a chord, it defaults to C, which is fine but unclear.
+* If tone is clicked without a chord, it defaults to C, which is fine but unclear; could update defaults
+  * could add button light-ups to make it clear. There is also already the "Selected Chord" text
 
 * Fret text does not show double sharps or flats, e.g.:
   * Baug: F## text is G
