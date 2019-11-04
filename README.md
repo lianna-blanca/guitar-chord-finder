@@ -59,3 +59,6 @@ Guitar HeroKu began as a student project at Enspiral Dev Academy, Wellington, Se
 
 * Test suite is not running; seems to be due to a Jest update. 
 
+* Button to clear fretboard sharps and flats sometimes does not work; unclear why
+
+* [unconfirmed] Chord Notes text sometimes does not update / display correct note names.
