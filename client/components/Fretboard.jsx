@@ -59,7 +59,7 @@ Need instead to have it take the ID and apply either sharp or flat
       if (this.props.selectedDisplay === "flats") {
         this.displayFlat(IDofFretToAlter)
       }
-      if (this.props.selectedDisplay === "clear") {
+      if (this.props.selectedDisplay === "natural") {
         IDofFretToAlter.innerHTML = ""
       }
   }

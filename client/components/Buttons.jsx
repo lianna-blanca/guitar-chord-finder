@@ -93,7 +93,7 @@ render() {
         <div className="tone-row">
           <button className="tone" type="button" value="#">#</button>
           <button className="tone" type="button" value="b">b</button>
-          <button className="tone" type="button" value="">clear</button>
+          <button className="tone" type="button" value="">natural</button>
         </div>
       </div>
 
