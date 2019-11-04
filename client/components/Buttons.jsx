@@ -52,7 +52,6 @@ defaultState() {
 render() { 
   return (
   <div className="keyChordContainer">
-{/* <div id="sandbox">sandbox</div> */}
 
   <div className="row">
     <div id="chord-display">
