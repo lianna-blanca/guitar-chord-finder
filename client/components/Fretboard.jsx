@@ -38,6 +38,7 @@ componentDidMount() {
 
 }
 
+
 fretDisplay() {
 /*
 Legacy code from when sharp/flat display buttons made all sharps/flats appear; need to untangle it.
@@ -45,8 +46,7 @@ Legacy code from when sharp/flat display buttons made all sharps/flats appear; n
 This uses the tone selected to determine what text should be lit up. 
 Need instead to have it take the ID and apply either sharp or flat
 
-what if instead of taking it from tone it takes the sharp/flat/neither from the chord selected?
-
+(what if instead of taking it from tone it takes the sharp/flat/neither from the chord selected?)
  */
 
 // ---- For changing the innerHTML of all frets depending on the display selected
@@ -123,24 +123,6 @@ getChordKey() {
   }
 }
 
-getFretsForChord() {
-// --- For fetching the fret positions to light up each chord.
-  this.clearLitNotes()
-
-  let chordKey = this.getChordKey()
-  let chordKeyForAPI = this.translateEnharmonics(chordKey) // e.g. C# -> Db as API does not deal in sharps
-  let chordQuality = this.props.selectedChord.selectedQuality || ""
-
-  let URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality)
-  
-  getAPIChordFrets(URLforAPI)
-  .then(res => {
-    if (res.body.length > 0) {
-      let fretData = (res.body[0].chordFretPositions || "").split(" ")
-      this.translateFretArrayToStrings(fretData)
-    }
-  })
-}
 
 translateEnharmonics(chordKey) {
 // ---- To convert keys with sharps to flats so they work for API/db
@@ -153,11 +135,34 @@ translateEnharmonics(chordKey) {
   else return chordKey
 }
 
+
 getURLforAPI(chordKeyForAPI, chordQuality) {
 // ---- For formatting the API call correctly
     let URLforAPI = chordKeyForAPI + "_" + chordQuality
     return URLforAPI
 }
+
+
+getFretsForChord() {
+// --- For fetching the fret positions to light up each chord.
+  this.clearLitNotes()
+
+  let chordKey = this.getChordKey()
+  let chordKeyForAPI = this.translateEnharmonics(chordKey) // e.g. C# -> Db as API does not deal in sharps
+  let chordQuality = this.props.selectedChord.selectedQuality || ""
+
+  let URLforAPI = this.getURLforAPI(chordKeyForAPI, chordQuality)
+  
+
+  getAPIChordFrets(URLforAPI)
+  .then(res => {
+    if (res.body.length > 0) {
+      let fretData = (res.body[0].chordFretPositions || "").split(" ")
+      this.translateFretArrayToStrings(fretData)
+    }
+  })
+}
+
 
 translateFretArrayToStrings(fretArray) {
 // ---- For capturing the fret numbers to light up each chord
@@ -175,31 +180,13 @@ translateFretArrayToStrings(fretArray) {
   }
 }
 
-clearLitNotes() {
-// --- To clear all currently-lit divs when a new chord is selected
-  let litNotes = document.getElementsByClassName("lit")
-  while (litNotes.length > 0) {
-  for (let i = 0; i < litNotes.length; i++) {
-    this.unLightNote(litNotes[i].attributes.id.value)
-    }
-  }
-}
-
-// -----------------------------------------------------------
-displayChordNotes() {
-// --- Adds note text to "Chord Notes:"
-  let chordNotes = Chord.notes(this.getChordKey(), this.props.selectedChord.selectedQuality)
-  if (chordNotes.length > 0) {
-    document.getElementById("note-display-text").innerHTML = chordNotes.join(" ")
-  }
-}
 
 lightUpNote(incomingID) {
 // --- To add the "lit" CSS class to selected fret divs
   let selectedNote = document.getElementById(incomingID)
   selectedNote.classList.add("lit")
 
-// untested!!
+// untested!! old, to be evaluated and redone
   if (selectedNote.classList.contains("sharp-or-flat")) {
     if (this.props.selectedChord.selectedTone == undefined || this.props.selectedChord.selectedTone === "") {
       let chordNotes = Chord.notes(this.getChordKey())
@@ -219,6 +206,27 @@ unLightNote(incomingID) {
   let selectedNote = document.getElementById(incomingID)
   selectedNote.classList.remove("lit")
 }
+
+
+clearLitNotes() {
+// --- To clear all currently-lit divs when a new chord is selected
+  let litNotes = document.getElementsByClassName("lit")
+  while (litNotes.length > 0) {
+  for (let i = 0; i < litNotes.length; i++) {
+    this.unLightNote(litNotes[i].attributes.id.value)
+    }
+  }
+}
+
+
+displayChordNotes() {
+// --- Adds note text to "Chord Notes:"
+  let chordNotes = Chord.notes(this.getChordKey(), this.props.selectedChord.selectedQuality)
+  if (chordNotes.length > 0) {
+    document.getElementById("note-display-text").innerHTML = chordNotes.join(" ")
+  }
+}
+
 
 render() {
 this.fretDisplay()
