@@ -387,24 +387,24 @@ var Buttons = function (_React$Component) {
           "div",
           { className: "display-selection" },
           _react2.default.createElement(
-            "h4",
+            "p",
             null,
-            "Display sharps or flats:"
-          ),
-          _react2.default.createElement(
-            "button",
-            { className: "fretboard-tone", type: "button", value: "sharps" },
-            "#"
-          ),
-          _react2.default.createElement(
-            "button",
-            { className: "fretboard-tone", type: "button", value: "flats" },
-            "b"
-          ),
-          _react2.default.createElement(
-            "button",
-            { className: "fretboard-tone", type: "button", value: "clear" },
-            "clear"
+            "Fretboard Display: ",
+            _react2.default.createElement(
+              "button",
+              { className: "fretboard-tone", type: "button", value: "sharps" },
+              "#"
+            ),
+            _react2.default.createElement(
+              "button",
+              { className: "fretboard-tone", type: "button", value: "flats" },
+              "b"
+            ),
+            _react2.default.createElement(
+              "button",
+              { className: "fretboard-tone", type: "button", value: "clear" },
+              "clear"
+            )
           )
         ),
         _react2.default.createElement(

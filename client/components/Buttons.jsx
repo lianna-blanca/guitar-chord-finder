@@ -68,10 +68,9 @@ render() {
   </div>
 
   <div className="display-selection">
-    <h4>Display sharps or flats:</h4>
-      <button className="fretboard-tone" type="button" value="sharps">#</button>
-      <button className="fretboard-tone" type="button" value="flats">b</button>
-      <button className="fretboard-tone" type="button" value="clear">clear</button>
+    <p>
+      Fretboard Display: <button className="fretboard-tone" type="button" value="sharps">#</button><button className="fretboard-tone" type="button" value="flats">b</button><button className="fretboard-tone" type="button" value="clear">clear</button>
+    </p>
   </div>
 
   <div className="chord-selection">
