@@ -477,7 +477,7 @@ var Buttons = function (_React$Component) {
               _react2.default.createElement(
                 "button",
                 { className: "tone", type: "button", value: "" },
-                "clear"
+                "natural"
               )
             )
           ),
@@ -635,8 +635,7 @@ var Fretboard = function (_React$Component) {
       This uses the tone selected to determine what text should be lit up. 
       Need instead to have it take the ID and apply either sharp or flat
       
-      what if instead of taking it from tone it takes the sharp/flat/neither from the chord selected?
-      
+      (what if instead of taking it from tone it takes the sharp/flat/neither from the chord selected?)
        */
 
       // ---- For changing the innerHTML of all frets depending on the display selected
@@ -649,7 +648,7 @@ var Fretboard = function (_React$Component) {
         if (this.props.selectedDisplay === "flats") {
           this.displayFlat(IDofFretToAlter);
         }
-        if (this.props.selectedDisplay === "clear") {
+        if (this.props.selectedDisplay === "natural") {
           IDofFretToAlter.innerHTML = "";
         }
       }
@@ -713,6 +712,21 @@ var Fretboard = function (_React$Component) {
       }
     }
   }, {
+    key: "translateEnharmonics",
+    value: function translateEnharmonics(chordKey) {
+      // ---- To convert keys with sharps to flats so they work for API/db
+      if (chordKey != undefined && chordKey.includes("#") || chordKey != undefined && chordKey.includes("Cb") || chordKey != undefined && chordKey.includes("Fb")) {
+        return Note.enharmonic(chordKey);
+      } else return chordKey;
+    }
+  }, {
+    key: "getURLforAPI",
+    value: function getURLforAPI(chordKeyForAPI, chordQuality) {
+      // ---- For formatting the API call correctly
+      var URLforAPI = chordKeyForAPI + "_" + chordQuality;
+      return URLforAPI;
+    }
+  }, {
     key: "getFretsForChord",
     value: function getFretsForChord() {
       var _this3 = this;
@@ -734,21 +748,6 @@ var Fretboard = function (_React$Component) {
       });
     }
   }, {
-    key: "translateEnharmonics",
-    value: function translateEnharmonics(chordKey) {
-      // ---- To convert keys with sharps to flats so they work for API/db
-      if (chordKey != undefined && chordKey.includes("#") || chordKey != undefined && chordKey.includes("Cb") || chordKey != undefined && chordKey.includes("Fb")) {
-        return Note.enharmonic(chordKey);
-      } else return chordKey;
-    }
-  }, {
-    key: "getURLforAPI",
-    value: function getURLforAPI(chordKeyForAPI, chordQuality) {
-      // ---- For formatting the API call correctly
-      var URLforAPI = chordKeyForAPI + "_" + chordQuality;
-      return URLforAPI;
-    }
-  }, {
     key: "translateFretArrayToStrings",
     value: function translateFretArrayToStrings(fretArray) {
       // ---- For capturing the fret numbers to light up each chord
@@ -765,36 +764,13 @@ var Fretboard = function (_React$Component) {
       }
     }
   }, {
-    key: "clearLitNotes",
-    value: function clearLitNotes() {
-      // --- To clear all currently-lit divs when a new chord is selected
-      var litNotes = document.getElementsByClassName("lit");
-      while (litNotes.length > 0) {
-        for (var i = 0; i < litNotes.length; i++) {
-          this.unLightNote(litNotes[i].attributes.id.value);
-        }
-      }
-    }
-
-    // -----------------------------------------------------------
-
-  }, {
-    key: "displayChordNotes",
-    value: function displayChordNotes() {
-      // --- Adds note text to "Chord Notes:"
-      var chordNotes = Chord.notes(this.getChordKey(), this.props.selectedChord.selectedQuality);
-      if (chordNotes.length > 0) {
-        document.getElementById("note-display-text").innerHTML = chordNotes.join(" ");
-      }
-    }
-  }, {
     key: "lightUpNote",
     value: function lightUpNote(incomingID) {
       // --- To add the "lit" CSS class to selected fret divs
       var selectedNote = document.getElementById(incomingID);
       selectedNote.classList.add("lit");
 
-      // untested!!
+      // untested!! old, to be evaluated and redone
       if (selectedNote.classList.contains("sharp-or-flat")) {
         if (this.props.selectedChord.selectedTone == undefined || this.props.selectedChord.selectedTone === "") {
           var chordNotes = Chord.notes(this.getChordKey());
@@ -813,6 +789,26 @@ var Fretboard = function (_React$Component) {
     value: function unLightNote(incomingID) {
       var selectedNote = document.getElementById(incomingID);
       selectedNote.classList.remove("lit");
+    }
+  }, {
+    key: "clearLitNotes",
+    value: function clearLitNotes() {
+      // --- To clear all currently-lit divs when a new chord is selected
+      var litNotes = document.getElementsByClassName("lit");
+      while (litNotes.length > 0) {
+        for (var i = 0; i < litNotes.length; i++) {
+          this.unLightNote(litNotes[i].attributes.id.value);
+        }
+      }
+    }
+  }, {
+    key: "displayChordNotes",
+    value: function displayChordNotes() {
+      // --- Adds note text to "Chord Notes:"
+      var chordNotes = Chord.notes(this.getChordKey(), this.props.selectedChord.selectedQuality);
+      if (chordNotes.length > 0) {
+        document.getElementById("note-display-text").innerHTML = chordNotes.join(" ");
+      }
     }
   }, {
     key: "render",
